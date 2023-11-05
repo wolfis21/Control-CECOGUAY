@@ -21,6 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'position',
+        'employee_id', //hay que implementar un controlador para los roles
     ];
 
     /**
@@ -42,4 +44,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function employee(){
+        return $this->belongsTo(Employee::class);
+    }
 }
