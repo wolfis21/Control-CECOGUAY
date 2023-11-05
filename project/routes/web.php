@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\CompaniesController;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\OfficeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +20,22 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+/* seccion de dashboard */
+Route::get('/dashboard', function () {
+    return view('dashboard/dashboard');
+});
+
+/* gestion de empresa */
+Route::resource('companies', CompaniesController::class);
+
+/* gestion de oficinas */
+Route::resource('offices', OfficeController::class);
+
+/* gestion de empleados */
+Route::resource('employee',EmployeeController::class);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Company;
+use App\Models\companies;
 use App\Models\Office;
 use Illuminate\Http\Request;
 
@@ -34,10 +34,10 @@ class OfficeController extends Controller
     public function create()
     {
         $office = new Office();
-        $company = Company::all();
+        $companies = companies::all();
      
         return view('office.create', compact('office'))->with([
-            'company' => $company
+            'companies' => $companies
         ]);
     }
 
@@ -52,11 +52,11 @@ class OfficeController extends Controller
         $request->validate([
             'address' => 'required|string|min:15',
             'num_contact' =>'required|string|min:8',
-            'company_id' =>'required',
+            'companies_id' =>'required|integer',
             ]);
         $office = Office::create($request->all());
 
-        return redirect()->route('office.index')
+        return redirect()->route('offices.index')
             ->with('success', 'office created successfully.');
     }
 
@@ -82,12 +82,12 @@ class OfficeController extends Controller
     public function edit($id)
     {
         $office = Office::find($id);
-        $office_company = Office::find($office->company_id);
-        $company = Company::all();
+        $office_companies = Office::find($office->companies_id);
+        $companies = Companies::all();
 
         return view('office.edit', compact('office'))->with([
-            'company' => $company,
-            'office_company' => $office_company,
+            'companies' => $companies,
+            'office_companies' => $office_companies,
         ]);
     }
 
@@ -96,12 +96,12 @@ class OfficeController extends Controller
         $request->validate([
             'address' => 'required|string|min:15',
             'num_contact' =>'required|string|min:8',
-            'company_id' =>'required',
+            'companies_id' =>'required',
             ]);
 
         $office->update($request->all());
 
-        return redirect()->route('office.index')
+        return redirect()->route('offices.index')
             ->with('success', 'office updated successfully');
     }
 
@@ -114,7 +114,7 @@ class OfficeController extends Controller
     {
         $office = Office::find($idOffice)->delete();
 
-        return redirect()->route('office.index')
+        return redirect()->route('offices.index')
             ->with('success', 'office deleted successfully');
     }
 }

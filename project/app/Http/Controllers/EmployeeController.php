@@ -25,7 +25,7 @@ class EmployeeController extends Controller
     {
         $employee = new Employee();
         $office = Office::all();
-        return view('Employee.create', compact('Employee'))->with([
+        return view('employee.create', compact('employee'))->with([
             'office'=> $office
         ]);
     }

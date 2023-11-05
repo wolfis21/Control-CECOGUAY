@@ -10,7 +10,7 @@ class Office extends Model
     static $rules = [
 		'address' => 'required',
         'num_contact' => 'required',
-        'company_id' => 'required',
+        'companies_id' => 'required',
     ];
 
     protected $perPage = 20;
@@ -20,10 +20,10 @@ class Office extends Model
      *
      * @var array
      */
-    protected $fillable = ['address','num_contact','company_id'];
+    protected $fillable = ['address','num_contact','companies_id'];
 
-    public function company(){
-        return $this->belongsTo(Company::class);
+    public function companies(){
+        return $this->belongsTo(companies::class);
     }
 
     public function employess(){

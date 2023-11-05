@@ -16,11 +16,11 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->string('address', 70)->nullable();
             $table->string('num_contact', 20)->nullable();
-            $table->unsignedBigInteger('company_id')->unsigned()->nullable();
-            $table->foreign('company_id')
+            $table->unsignedBigInteger('companies_id')->unsigned()->nullable();
+            $table->foreign('companies_id')
             ->cascadeOnDelete()
             ->cascadeOnUpdate()
-            ->references('id')->on('company');
+            ->references('id')->on('companies');
             $table->rememberToken();
             $table->timestamps();
         });
