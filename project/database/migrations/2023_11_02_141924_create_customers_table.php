@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('img_partida_n'); //ruta de img
             $table->string('sex');
             $table->string('civil_status');
-            $table->string('professional_status');
+            $table->string('profession_status');
             $table->string('address', 75)->nullable();
             $table->string('phone', 35)->nullable();
             $table->string('landline', 35)->nullable(); //telefono fijo
@@ -33,7 +33,6 @@ return new class extends Migration
             ->cascadeOnDelete()
             ->cascadeOnUpdate()
             ->references('id')->on('offices');
-            $table->rememberToken();
             $table->timestamps();
         });
     }

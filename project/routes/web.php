@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CompaniesController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\OfficeController;
 
@@ -21,6 +22,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Auth::routes();
 
 /* seccion de dashboard */
 Route::get('/dashboard', function () {
@@ -36,6 +38,8 @@ Route::resource('offices', OfficeController::class);
 /* gestion de empleados */
 Route::resource('employee',EmployeeController::class);
 
-Auth::routes();
+/* gestion de clientes */
+Route::resource('customer',CustomerController::class);
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -23,7 +23,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        $Customer = new Customer();
+        $customer = new Customer();
         $offices = Office::all();
         return view('customer.create', compact('customer'))->with([
             'offices'=> $offices
@@ -43,20 +43,46 @@ class CustomerController extends Controller
             'subname' =>'required|string',
             'cedula' => 'required|integer',
             'date_n' =>'required|date',
+            'img_cedula' =>'required|image',
+            'img_partida_n' =>'required|image',
             'sex' =>'required|string',
             'civil_status' =>'required|string',
-            'profesion' =>'required|string',
+            'profession_status' =>'required|string',
             'address' =>'required|string',
             'phone' =>'required|integer|min:8',
             'landline' =>'required|integer|min:8',
-            'nacionalidad' =>'required|string',
+            'nationality' =>'required|string',
             'date_admission' =>'required|date',
-            'img-cedula' =>'required|string',
-            'img-nacimiento' =>'required|string',
             'offices_id' => 'required',
         ]);
 
-        $Customer = Customer::create($request->all());
+        $imgCedula = $request->file('img_cedula');
+        $imgPartidaN = $request->file('img_partida_n');
+    
+        // Guardar la imagen de la cedula
+        $imgCedulaPath = $imgCedula->store('docs', 'storage');
+    
+        // Guardar la imagen de la partida de nacimiento
+        $imgPartidaNPath = $imgPartidaN->store('docs', 'storage');
+    
+        // Crear el registro del cliente en la base de datos
+        $customer = Customer::create([
+            'name' => $request->input('name'),
+            'subname' => $request->input('subname'),
+            'cedula' => $request->input('cedula'),
+            'date_n' => $request->input('date_n'),
+            'img_cedula' => $imgCedulaPath,
+            'img_partida_n' => $imgPartidaNPath,
+            'sex' => $request->input('sex'),
+            'civil_status' => $request->input('civil_status'),
+            'profession_status' => $request->input('profession_status'),
+            'address' => $request->input('address'),
+            'phone' => $request->input('phone'),
+            'landline' => $request->input('landline'),
+            'nationality' => $request->input('nationality'),
+            'date_admission' => $request->input('date_admission'),
+            'offices_id' => $request->input('offices_id'),
+        ]);
 
         return redirect()->route('customer.index')
             ->with('success', 'Customer created successfully.');
@@ -70,7 +96,7 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
-        $Customer = Customer::find($id);
+        $customer = Customer::find($id);
 
         return view('customer.show', compact('customer'));
     }
@@ -107,21 +133,35 @@ class CustomerController extends Controller
             'subname' =>'required|string',
             'cedula' => 'required|integer',
             'date_n' =>'required|date',
+            'img_cedula' =>'required|image',
+            'img_partida_n' =>'required|image',
             'sex' =>'required|string',
             'civil_status' =>'required|string',
-            'profesion' =>'required|string',
+            'profession_status' =>'required|string',
             'address' =>'required|string',
             'phone' =>'required|integer|min:8',
             'landline' =>'required|integer|min:8',
-            'nacionalidad' =>'required|string',
+            'nationality' =>'required|string',
             'date_admission' =>'required|date',
-            'img-cedula' =>'required|string',
-            'img-nacimiento' =>'required|string',
             'offices_id' => 'required',
         ]);
-
+    
+        // Verificar si se enviaron nuevos archivos
+        if ($request->hasFile('img_cedula')) {
+            $imgCedula = $request->file('img_cedula');
+            $imgCedulaPath = $imgCedula->store('docs', 'public');
+            $customer->img_cedula = $imgCedulaPath;
+        }
+    
+        if ($request->hasFile('img_partida_n')) {
+            $imgNacimiento = $request->file('img_partida_n');
+            $imgNacimientoPath = $imgNacimiento->store('docs', 'public');
+            $customer->img_nacimiento = $imgNacimientoPath;
+        }
+    
+        // Actualizar los demás campos del cliente
         $customer->update($request->all());
-
+    
         return redirect()->route('customer.index')
             ->with('success', 'Customer updated successfully');
     }
