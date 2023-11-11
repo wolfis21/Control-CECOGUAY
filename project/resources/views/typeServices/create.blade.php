@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    Crear Empresa 
+    Crear Servicio
 @endsection
 
 @section('content')
@@ -12,14 +12,14 @@
                 @includeif('partials.errors')
 
                 <div class="card">
-                    <div class="card-body" style="padding: 0 20px 10px 20px;">
-                        <h5 class="card-title">Crear Empresa </h5>
+                    <div class="card-body">
+                        <h5 class="card-title">Crear Servicio</h5>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('companies.store') }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('typeService.store') }}"  role="form" enctype="multipart/form-data">
                             @csrf
 
-                            @include('companies.form')
+                            @include('typeServices.form')
 
                         </form>
                     </div>

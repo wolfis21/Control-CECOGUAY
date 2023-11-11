@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('type_services', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('price');
+            $table->float('price');
             $table->rememberToken();
             $table->timestamps();
         });

@@ -11,7 +11,9 @@ class TypeService extends Model
 
     static $rules = [
         'name' => 'required',
-        'precio_ref' => 'required',
+        'price' => 'required',
     ];
+
+    protected $fillable = ['name','price'];
 
 }

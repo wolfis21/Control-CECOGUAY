@@ -28,11 +28,11 @@ return new class extends Migration
             $table->string('landline', 35)->nullable(); //telefono fijo
             $table->string('nationality');
             $table->date('date_admission')->nullable();
-            $table->unsignedBigInteger('offices_id')->unsigned()->nullable();
-            $table->foreign('offices_id')
+            $table->unsignedBigInteger('contracts_id')->unsigned()->nullable();
+            $table->foreign('contracts_id')
             ->cascadeOnDelete()
             ->cascadeOnUpdate()
-            ->references('id')->on('offices');
+            ->references('id')->on('contracts');
             $table->rememberToken();
             $table->timestamps();
         });

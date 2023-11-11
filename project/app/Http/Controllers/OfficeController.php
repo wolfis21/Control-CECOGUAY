@@ -56,8 +56,8 @@ class OfficeController extends Controller
             ]);
         $office = Office::create($request->all());
 
-        return redirect()->route('offices.index')
-            ->with('success', 'office created successfully.');
+        return redirect()->route('companies.index')
+            ->with('successOffice', 'Oficina creada con éxito.');
     }
 
     /**
@@ -101,8 +101,8 @@ class OfficeController extends Controller
 
         $office->update($request->all());
 
-        return redirect()->route('offices.index')
-            ->with('success', 'office updated successfully');
+        return redirect()->route('companies.index')
+            ->with('successOffice', 'Oficina Actualizada con éxito.');
     }
 
     /**
@@ -114,7 +114,7 @@ class OfficeController extends Controller
     {
         $office = Office::find($idOffice)->delete();
 
-        return redirect()->route('offices.index')
-            ->with('success', 'office deleted successfully');
+        return redirect()->route('companies.index')
+            ->with('successOffice', 'Oficina eliminada con éxito.');
     }
 }

@@ -12,8 +12,8 @@ class TypeServiceController extends Controller
     {
         $typeServices =TypeService::paginate();
 
-        return view('$typeServices.index', compact('$typeServices'))
-            ->with('i', (request()->input('page', 1) - 1) * $$typeServices->perPage());
+        return view('typeServices.index', compact('typeServices'))
+            ->with('i', (request()->input('page', 1) - 1) * $typeServices->perPage());
     }
 
     /**
@@ -23,8 +23,8 @@ class TypeServiceController extends Controller
      */
     public function create()
     {
-        $typeServices = new TypeService();
-        return view('typeServices.create', compact('typeServices'));
+        $typeService = new TypeService();
+        return view('typeServices.create', compact('typeService'));
     }
 
     /**
@@ -37,7 +37,7 @@ class TypeServiceController extends Controller
     {       
          $request->validate([
             'name' => 'required|string',
-            'precio_ref' => 'required|float',
+            'price' => 'required|float',
           ]);
         $typeService =TypeService::create($request->all());
 
@@ -68,7 +68,7 @@ class TypeServiceController extends Controller
     {
         $typeService =TypeService::find($idTypeService);
 
-        return view('typeService.edit', compact('typeService'));
+        return view('typeServices.edit', compact('typeService'));
     }
 
     /**
@@ -82,7 +82,7 @@ class TypeServiceController extends Controller
     { 
         $request->validate([
             'name' => 'required|string',
-            'precio_ref' => 'required|float',
+            'price' => 'required|float',
           ]);
         
           $typeService->update($request->all());

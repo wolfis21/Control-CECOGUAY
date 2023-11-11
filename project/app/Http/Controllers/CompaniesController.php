@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Companies;
+use App\Models\Office;
 use Illuminate\Http\Request;
 
 class CompaniesController extends Controller
@@ -10,9 +11,11 @@ class CompaniesController extends Controller
     public function index()
     {
         $companiess = Companies::paginate();
+        $offices = Office::all();
 
         return view('companies.index', compact('companiess'))
-            ->with('i', (request()->input('page', 1) - 1) * $companiess->perPage());
+            ->with(['i', (request()->input('page', 1) - 1) * $companiess->perPage(),
+            'offices' => $offices,]);
     }
 
     /**
@@ -43,7 +46,7 @@ class CompaniesController extends Controller
         $companies = companies::create($request->all());
 
         return redirect()->route('companies.index')
-            ->with('success', 'companies created successfully.');
+            ->with('success', 'Empresa creada con éxito.');
     }
 
     /**
@@ -91,7 +94,7 @@ class CompaniesController extends Controller
         $companies->update($request->all());
 
         return redirect()->route('companies.index')
-            ->with('success', 'companies updated successfully');
+            ->with('success', 'Empresa actualizada con éxito');
     }
 
     /**
@@ -104,6 +107,6 @@ class CompaniesController extends Controller
         $companies = Companies::find($idCompanies)->delete();
 
         return redirect()->route('companies.index')
-            ->with('success', 'companies deleted successfully');
+            ->with('success', 'Empresa eliminada éxito');
     }
 }

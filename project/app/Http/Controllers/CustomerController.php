@@ -85,7 +85,7 @@ class CustomerController extends Controller
         ]);
 
         return redirect()->route('customer.index')
-            ->with('success', 'Customer created successfully.');
+            ->with('success', 'Cliente creado con éxito.');
     }
 
     /**
@@ -163,7 +163,7 @@ class CustomerController extends Controller
         $customer->update($request->all());
     
         return redirect()->route('customer.index')
-            ->with('success', 'Customer updated successfully');
+            ->with('success', 'Cliente actualizado con éxito.');
     }
 
     /**
@@ -176,6 +176,6 @@ class CustomerController extends Controller
         $customer = Customer::find($id)->delete();
 
         return redirect()->route('customer.index')
-            ->with('success', 'Customer deleted successfully');
+            ->with('success', 'Cliente eliminado con éxito.');
     }
 }

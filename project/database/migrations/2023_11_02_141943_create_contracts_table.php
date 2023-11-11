@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::disableForeignKeyConstraints();
         Schema::create('contracts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->date('date_admission')->nullable();
-            $table->string('cost_semanal');
-            $table->string('semana_cobro');
-            $table->string('atrasos');
-            $table->string('suspendido');
-            $table->string('observaciones');
+            $table->date('date_admission');
+            $table->string('cost_semanal')->nullable();
+            $table->string('semana_cobro')->nullable();
+            $table->string('atrasos')->nullable();
+            $table->string('suspendido')->nullable();
+            $table->string('observaciones')->nullable();
             $table->unsignedBigInteger('type_services_id')->unsigned()->nullable();
             $table->foreign('type_services_id')
             ->cascadeOnDelete()

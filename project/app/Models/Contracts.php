@@ -27,7 +27,4 @@ class Contracts extends Model
         return $this->belongsTo(TypeService::class);
     }
 
-    public function contractsBeneficaries(){
-        return $this->hasMany(Beneficiaries::class); // añadir clase al crearla
-    }
 }

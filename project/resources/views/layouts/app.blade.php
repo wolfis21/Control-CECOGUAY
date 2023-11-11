@@ -60,13 +60,13 @@
                     @guest
                         @if (Route::has('login'))
                     <li class="nav-item" style="padding: 20px;">
-                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        <a class="nav-link" href="{{ route('login') }}">{{ __('Iniciar Sesion') }}</a>
                     </li>
                     @endif
 
                     @if (Route::has('register'))
                         <li class="nav-item" style="padding: 5px;">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            <a class="nav-link" href="{{ route('register') }}">{{ __('Registrarse') }}</a>
                         </li>
                     @endif
                 @else
@@ -112,25 +112,25 @@
             </li><!-- End Dashboard Nav -->
 
             <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-handbag-fill"></i><span>Empresa</span><i class="bi bi-chevron-down ms-auto"></i>
+                <a class="nav-link collapsed" href="{{ route('companies.index') }}">
+                    <i class="bi bi-handbag-fill"></i><span>Gestion Empresarial</span>
                 </a>
-                <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+{{--                 <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
                         <a href="{{ route('companies.index') }}">
                             <i class="bi bi-circle"></i><span>Ver</span>
                         </a>
                     </li>
-{{--                     <li>
+                    <li>
                         <a href="{{ route('companies.create') }}">
                             <i class="bi bi-circle"></i><span>Crear</span>
                         </a>
-                    </li> --}}
+                    </li>
 
-                </ul>
+                </ul> --}}
             </li><!-- End Components Nav -->
 
-            <li class="nav-item">
+{{--             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-building"></i><span>Oficinas</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
@@ -140,14 +140,14 @@
                             <i class="bi bi-circle"></i><span>Ver</span>
                         </a>
                     </li>
-{{--                     <li>
+                    <li>
                         <a href="{{ route('offices.create') }}">
                             <i class="bi bi-circle"></i><span>Crear</span>
                         </a>
-                    </li> --}}
+                    </li>
                 </ul>
             </li><!-- End Forms Nav -->
-
+ --}}
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-bar-chart"></i><span>Empleados</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -185,12 +185,12 @@
 
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-cart-plus-fill"></i><span>Ventas</span><i class="bi bi-chevron-down ms-auto"></i>
+                    <i class="bi bi-cart-plus-fill"></i><span>Tipos de Servicios</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                       {{--  <a href="{{ route('venta.index') }}"> --}}
-                            <i class="bi bi-circle"></i><span>Ver</span>
+                        <a href="{{ route('typeService.index') }}">
+                            <i class="bi bi-circle"></i><span>Tipos de Servicios</span>
                         </a>
                     </li>
                     <li>

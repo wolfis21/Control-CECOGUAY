@@ -6,6 +6,7 @@ use App\Http\Controllers\CompaniesController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\OfficeController;
+use App\Http\Controllers\TypeServiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,5 +42,9 @@ Route::resource('employee',EmployeeController::class);
 /* gestion de clientes */
 Route::resource('customer',CustomerController::class);
 
+
+
+/* gestion de type-service */
+Route::resource('typeService',TypeServiceController::class);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
