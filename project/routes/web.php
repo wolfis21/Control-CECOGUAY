@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CompaniesController;
+use App\Http\Controllers\ContractsController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\OfficeController;
@@ -25,9 +26,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
-/* seccion de dashboard */
+/* seccion de dashboard user */
 Route::get('/dashboard', function () {
     return view('dashboard/dashboard');
+});
+/* seccion de dashboard admin */
+Route::get('/dashboardAdmin', function () {
+    return view('dashboard/dashboardAdmin');
 });
 
 /* gestion de empresa */
@@ -42,7 +47,8 @@ Route::resource('employee',EmployeeController::class);
 /* gestion de clientes */
 Route::resource('customer',CustomerController::class);
 
-
+/* gestion de contratos */
+Route::resource('contracts',ContractsController::class);
 
 /* gestion de type-service */
 Route::resource('typeService',TypeServiceController::class);

@@ -45,7 +45,7 @@ class ContractsController extends Controller
             'semana-cobro' => 'required|integer',
             'atrasos' =>'required|date',
             'suspendido' =>'required|string',
-            'type-service' =>'required|string',
+            'type-service_id' =>'required|string',
             'customers_id' =>'required',
         ]);
 

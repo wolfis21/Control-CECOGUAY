@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use App\Models\Office;
+use App\Models\Contracts;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -83,6 +84,21 @@ class CustomerController extends Controller
             'date_admission' => $request->input('date_admission'),
             'offices_id' => $request->input('offices_id'),
         ]);
+
+                    // Obtener la fecha actual
+            $currentDate = date('d-m-y');
+
+            // Crear el registro del contrato en la base de datos
+            $contract = Contracts::create([
+                'date_admission' => $currentDate,
+                'cost_semanal' => '0', // valor por defecto
+                'semana_cobro' => '0', // valor por defecto
+                'atrasos' => $currentDate, // valor por defecto
+                'suspendido' => '0', // valor por defecto
+                'observaciones' => 'No presenta', // valor por defecto
+                'type_services_id' => 1, // valor por defecto
+                'customers_id' => $customer->id, // usar el id del cliente recién creado
+            ]);
 
         return redirect()->route('customer.index')
             ->with('success', 'Cliente creado con éxito.');

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.appAdmin')
 
 @section('content')
 <div class="main" id="main">
@@ -13,9 +13,10 @@
 
     <section class="section dashboard">
         <div class="section-dash">
-            <i class="bi bi-person-workspace" style="    font-size: 15rem"></i>
-            <span>Nombre de usuario del USUARIO</span>
+            <i class="bi bi-gear-wide-connected" style="    font-size: 15rem"></i>
+            <span>Nombre de usuario de ADMINISTRADOR</span>
         </div>
+      </div>
     </section>
 
     <style type="text/css">

@@ -45,7 +45,7 @@
                                         <th>Telefono</th>
                                         <th>Telf. fijo</th>
                                         <th>Nacionalidad</th>
-                                        {{-- <th>oficina</th> --}}
+                                        <th>Asociado</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -64,7 +64,7 @@
                                             <td>{{ $customer->phone}}</td>
                                             <td>{{ $customer->landline}}</td>
                                             <td>{{ $customer->nationality}}</td>
-                                            {{-- <td>{{ $customer->offices_id}}</td> --}} {{-- no necesario mostrar --}}
+                                            <td>{{ $customer->office->address}}</td> 
                                             <td></td>
                                             <td>
                                                 <form action="{{ route('customer.destroy',$customer->id) }}" method="POST">

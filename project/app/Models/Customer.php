@@ -46,8 +46,8 @@ class Customer extends Model
 
         // otros campos aquí
      ];
-    public function office(){
-        return $this->belongsTo(Office::class);
+     public function office(){
+        return $this->belongsTo(Office::class,'offices_id', 'id');
     }
     
 }

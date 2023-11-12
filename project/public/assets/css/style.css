@@ -16,6 +16,7 @@ body {
   font-family: "Open Sans", sans-serif;
   background: #f6f9ff;
   color: #444444;
+  font-size: 14px;
 }
 
 a {
@@ -714,8 +715,10 @@ h6 {
 }
 
 .sidebar-nav .nav-link.collapsed {
-  color: black;
-  background: #fff;
+/*   color: black;
+  background: #fff; */
+  color: #418BF2;
+  background: #f6f9ff;
 }
 
 .sidebar-nav .nav-link.collapsed i {
@@ -723,8 +726,8 @@ h6 {
 }
 
 .sidebar-nav .nav-link:hover {
-  color: #418BF2;
-  background: #f6f9ff;
+  color: white;
+  background: #4154f1;
 }
 
 .sidebar-nav .nav-link:hover i {

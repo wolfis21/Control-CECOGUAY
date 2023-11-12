@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.appAdmin')
 
 @section('template_title')
     empresa
@@ -127,5 +127,15 @@
             </div>
         </div>
     </div>
+    <style>
+        .main thead{
+            font-size: 13px!important;
+        }
+        
+        .main tbody{
+            font-size: 14px!important;
+        }
+
+    </style>
 @endsection
 `

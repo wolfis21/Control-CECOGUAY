@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.appAdmin')
 
 @section('template_title')
     Tipos de Servicios
@@ -18,7 +18,7 @@
 
                              <div class="float-right">
                                 <a href="{{ route('typeService.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Create New') }}
+                                  {{ __('Crear Nuevo') }}
                                 </a>
                               </div>
                         </div>
@@ -47,10 +47,10 @@
                                             <td>
                                                 <form action="{{ route('typeService.destroy',$typeService->id) }}" method="POST">
                                                    {{--  <a class="btn btn-sm btn-primary " href="{{ route('typeService.show',$typeService->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a> --}}
-                                                    <a class="btn btn-sm btn-success" href="{{ route('typeService.edit',$typeService->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('typeService.edit',$typeService->id) }}"><i class="fa fa-fw fa-edit"></i> Editar</a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Eliminar</button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -64,5 +64,15 @@
             </div>
         </div>
     </div>
+    <style>
+        .main thead{
+            font-size: 13px!important;
+        }
+        
+        .main tbody{
+            font-size: 14px!important;
+        }
+
+    </style>
 @endsection
 `

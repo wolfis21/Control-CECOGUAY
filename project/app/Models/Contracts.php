@@ -15,16 +15,19 @@ class Contracts extends Model
         'semana-cobro' => 'required',
         'atrasos' => 'required',
         'suspendido' => 'required',
-        'type-service' => 'required',
+        'observaciones' => 'required',
+        'type_services_id' => 'required',
         'customers_id' => 'required',
     ];
 
-    public function customers(){
-        return $this->belongsTo(Customer::class);
+    protected $fillable = ["date_admission", "cost-semanal", "semana-cobro","atrasos", "suspendido","observaciones", "type_service_id","customers_id"];
+
+    public function customer(){
+        return $this->belongsTo(Customer::class, 'customers_id', 'id');
     }
 
     public function typeService(){
-        return $this->belongsTo(TypeService::class);
+        return $this->belongsTo(TypeService::class, 'type_services_id','id');
     }
 
 }

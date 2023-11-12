@@ -80,7 +80,7 @@
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary" style="font-size: 14px;">
                                     {{ __('Registrar') }}
                                 </button>
                             </div>
@@ -91,4 +91,10 @@
         </div>
     </div>
 </div>
+
+<style>
+ .form-control{
+    font-size: 14px;
+ }
+</style>
 @endsection

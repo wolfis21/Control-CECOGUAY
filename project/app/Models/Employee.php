@@ -29,7 +29,7 @@ class Employee extends Model
     protected $fillable = ['cedula','name','subname', 'date_n', 'address', 'phone', 'offices_id'];
 
     public function office(){
-        return $this->belongsTo(Office::class);
+        return $this->belongsTo(Office::class,'offices_id', 'id');
     }
 
     public function users(){

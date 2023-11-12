@@ -39,7 +39,7 @@
     <header id="header" class="header fixed-top d-flex align-items-center">
 
         <div class="d-flex align-items-center justify-content-between">
-            <a href="dashboard" class="logo d-flex align-items-center">
+            <a href="dashboardAdmin" class="logo d-flex align-items-center">
                 <img src="assets/img/logo.png" alt="">
                 <span class="d-none d-lg-block">CECOGUAY</span>
             </a>
@@ -105,30 +105,28 @@
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item">
-                <a class="nav-link " href="/dashboard">
+                <a class="nav-link " href="/dashboardAdmin">
                     <i class="bi bi-grid"></i>
                     <span>Inicio</span>
                 </a>
             </li><!-- End Dashboard Nav -->
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('customer.index') }}">
-                    <i class="bi bi-person-lines-fill"></i><span>Gestionar Clientes</span>
+                <a class="nav-link collapsed" href="{{ route('companies.index') }}">
+                    <i class="bi bi-building"></i><span>Gestion Empresarial</span>
                 </a>
-            </li><!-- End Tables Nav -->
+            </li><!-- End Components Nav -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ route('employee.index') }}">
+                    <i class="bi bi-file-earmark-person-fill"></i><span>Gestion de Empleados</span>
+                </a>
+            </li><!-- End Charts Nav -->
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('contracts.index') }}">
-                    <i class="bi bi-file-earmark-text-fill"></i><span>Gestion de Contratos</span>
+                <a class="nav-link collapsed" href="{{ route('typeService.index') }}">
+                    <i class="bi bi-check2-circle"></i><span>Gestion de Servicios</span>
                 </a>
-{{--                 <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a href="{{ route('customer.index') }}">
-                            <i class="bi bi-circle"></i><span>Ver</span>
-                        </a>
-                    </li>
-                </ul> --}}
-            </li><!-- End Tables Nav -->
+            </li><!-- End Icons Nav -->
 
         </ul>
 
