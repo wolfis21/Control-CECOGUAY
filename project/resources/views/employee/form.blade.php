@@ -36,7 +36,23 @@
             {!! $errors->first('phone', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         
-
+        <div class="form-group" style="    padding-top: 10px; width: 28rem;">
+            <label for="position">{{ __('Cargo') }}</label>
+        
+            <div>
+                <select id="position" class="form-control @error('position') is-invalid @enderror" name="position" required autocomplete="position" autofocus>
+                    <option value="administrador" {{ old('position') == 'administrador' ? 'selected' : '' }}>Administrador</option>
+                    <option value="usuario" {{ old('position') == 'usuario' ? 'selected' : '' }}>Usuario</option>
+                </select>
+        
+                @error('position')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+        </div>
+        
         <div class="form-group" style="    padding-top: 10px; width: 28rem;">
             <label for="statu">Pertenece a la Oficina</label>
             <select name="offices_id" class="form-control"  id="office" >

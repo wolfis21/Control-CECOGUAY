@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Employee;
 use App\Models\Office;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -48,7 +49,24 @@ class EmployeeController extends Controller
             'offices_id' => 'required',
         ]);
 
-        $employee = Employee::create($request->all());
+        $employee = Employee::create([
+            'cedula' => $request->input('cedula'),
+            'name' => $request->input('name'),
+            'subname' => $request->input('subname'),
+            'date_n' => $request->input('date_n'),
+            'address' => $request->input('address'),
+            'phone' => $request->input('phone'),
+            'offices_id' => $request->input('offices_id'),
+        ]);
+
+        $user = User::create([
+            'name' => $request->input('name'),
+            'email'=> $request->input('name').'@cecoguay.com',
+            'email_verified_at' => null,
+            'password' => $request->input('name').'12345', //agregar a la documentacion
+            'position' => $request->input('position'),
+            'employees_id' => $employee->id,
+        ]);
 
         return redirect()->route('employee.index')
             ->with('success', 'Employee created successfully.');

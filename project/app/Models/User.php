@@ -22,7 +22,7 @@ class User extends Authenticatable
         'email',
         'password',
         'position',
-        'employee_id', //hay que implementar un controlador para los roles
+        'employees_id', //hay que implementar un controlador para los roles
     ];
 
     /**
@@ -46,6 +46,6 @@ class User extends Authenticatable
     ];
 
     public function employee(){
-        return $this->belongsTo(Employee::class);
+        return $this->belongsTo(Employee::class, 'employees_id', 'id' );
     }
 }

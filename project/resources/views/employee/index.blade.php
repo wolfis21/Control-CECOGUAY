@@ -6,6 +6,14 @@
 
 @section('content')
     <div class="main" id="main">
+        <nav class="navbar bg-body-tertiary">
+            <div class="container-fluid">
+              <form class="d-flex" role="search" style="    width: 83rem;">
+                <input class="form-control me-2" type="search" placeholder="Escribe..." aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Buscar</button>
+              </form>
+            </div>
+          </nav>
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">

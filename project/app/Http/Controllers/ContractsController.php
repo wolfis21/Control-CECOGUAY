@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Contracts;
 use App\Models\Customer;
+use App\Models\TypeService;
 use Illuminate\Http\Request;
 
 class ContractsController extends Controller
@@ -45,7 +46,7 @@ class ContractsController extends Controller
             'semana-cobro' => 'required|integer',
             'atrasos' =>'required|date',
             'suspendido' =>'required|string',
-            'type-service_id' =>'required|string',
+            'type_services_id' =>'required|string',
             'customers_id' =>'required',
         ]);
 
@@ -63,9 +64,9 @@ class ContractsController extends Controller
      */
     public function show($id)
     {
-        $contracts = Contracts::find($id);
+        $contract = Contracts::find($id);
 
-        return view('contracts.show', compact('contracts'));
+        return view('contracts.show', compact('contract'));
     }
 
     /**
@@ -76,15 +77,16 @@ class ContractsController extends Controller
      */
     public function edit($id)
     {
-        $contracts = Contracts::find($id);
-        $customers_Contracts = Customer::find($contracts->customer_id);
-        $type_Contracts = Customer::find($contracts->customer_id); //agregar el type_contract
+        $contract = Contracts::find($id);
+        $customers_Contracts = Customer::find($contract->customer_id);
+        $type_Contracts = TypeService::all(); //agregar el type_contract
              //aca añadir tambien a los beneficiarios
 
-        return view('contracts.edit', compact('contracts'))->with([
-            'contracts' => $contracts,
+        return view('contracts.edit', compact('contract'))->with([
+            'contract' => $contract,
             'customer_Contracts' =>$customers_Contracts,
-        ]);;
+            'type_Contracts'=> $type_Contracts,
+        ]);
     }
 
     /**
@@ -97,12 +99,12 @@ class ContractsController extends Controller
     public function update(Request $request, Contracts $contracts)
     {
         $request->validate([
-            'date_admission' =>'required|date',
-            'cost-semnanal' =>'required|integer',
-            'semana-cobro' => 'required|integer',
-            'atrasos' =>'required|date',
-            'suspendido' =>'required|string',
-            'type-service' =>'required|string',
+            'date_admission' =>'date',
+            'cost-semnanal' =>'integer',
+            'semana-cobro' => 'integer',
+            'atrasos' =>'date',
+            'suspendido' =>'string',
+            'type_services_id' =>'string',
             'customers_id' =>'required',
         ]);
 
