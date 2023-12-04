@@ -16,7 +16,7 @@ class Beneficiaries extends Model
         'date_n' => 'required',
         'sex' => 'required',
         'civil_status' => 'required',
-        'profession' => 'required',
+        'professional_status' => 'required',
         'phone' => 'required',
         'landline' => 'required',
         'nacionalidad' => 'required',
@@ -27,7 +27,26 @@ class Beneficiaries extends Model
         'contracts_id' => 'required',
     ];
 
-    /* protected $filiable = ['name','',]; */ //no need to
+    protected $fillable = [
+        'name',
+        'subname',
+        'cedula',
+        'date_n',
+        'img_cedula',
+        'img_partida_n',
+        'sex',
+        'civil_status',
+        'professional_status',
+        'address',
+        'phone',
+        'landline',
+        'nationality',
+        'date_admission',
+        'parentesco',
+        'contracts_id',
+
+        // otros campos aquí
+     ];
 
     public function contracts(){
         return $this->hasMany(Contracts::class);

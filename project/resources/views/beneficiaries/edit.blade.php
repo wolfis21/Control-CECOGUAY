@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    Modificar Contrato funerario
+    Actualizar Beneficiarios
 @endsection
 
 @section('content')
@@ -13,14 +13,14 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">Actualizar Contrato</span>
+                        <span class="card-title">Actualizar Beneficiarios</span>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('contracts.update', $contracts->id) }}"  role="form" enctype="multipart/form-data">
-                            {{ method_field('PATCH') }}
+                        <form method="POST" action="{{ route('beneficiaries.update', $beneficiaries->id) }}"  role="form" enctype="multipart/form-data">
                             @csrf
+                            @method('PATCH')
 
-                            @include('contracts.form')
+                            @include('beneficiaries.form2')
 
                         </form>
                     </div>

@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('subname');
             $table->integer('cedula');
             $table->date('date_n')->nullable();
-            $table->string('img_cedula'); //ruta de img
-            $table->string('img_partida_n'); //ruta de img
+            $table->string('img_cedula')->nullable(); //ruta de img
+            $table->string('img_partida_n')->nullable(); //ruta de img
             $table->string('sex');
             $table->string('civil_status');
             $table->string('profession_status');

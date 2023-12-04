@@ -8,6 +8,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\OfficeController;
 use App\Http\Controllers\TypeServiceController;
+use App\Http\Controllers\BeneficiariesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,10 +59,17 @@ Route::group(['middleware' => 'check.position:usuario'], function () {
         return view('dashboard/dashboard');
     });
     /* gestion de clientes */
+    Route::get('/customer/search', '\App\Http\Controllers\CustomerController@search')->name('customer.search');
     Route::resource('customer',CustomerController::class);
+
     
     /* gestion de contratos */
     Route::resource('contracts',ContractsController::class);
+
+    /* gestion de beneficiarios */
+    Route::resource('beneficiaries', BeneficiariesController::class);
+    /* Route::get('beneficiaries/createWithContract/{contract}', 'BeneficiariesController@createWithContract')->name('beneficiaries.createWithContract'); */
+
 });
 
 

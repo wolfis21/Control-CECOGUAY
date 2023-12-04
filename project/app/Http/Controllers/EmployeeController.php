@@ -68,6 +68,7 @@ class EmployeeController extends Controller
             'employees_id' => $employee->id,
         ]);
 
+
         return redirect()->route('employee.index')
             ->with('success', 'Employee created successfully.');
     }

@@ -15,15 +15,19 @@ class CheckPosition
      */
     public function handle(Request $request, Closure $next)
     {
-        if ((!$request->user() && !$request->user()->position != 'administrador')
+/*         if ((!$request->user() && !$request->user()->position != 'administrador')
                  || (!$request->user() && !$request->user()->position != 'usuario')) {
             abort(403, 'Acceso no autorizado.');
-        }
+        } */
 
-/*         if (($request->user()->position != 'usuario' || $request->user()->position != 'administrador')) {
-           abort(403, 'Acceso no autorizado.');
-} */
+        if (!$request->user()) {
+            return redirect('/login'); // Redirigir al usuario a la página de inicio de sesión si no está autenticado
+        }
     
+        if (!in_array($request->user()->position, ['administrador', 'usuario'])) {
+            abort(403, 'Acceso no autorizado.');
+        }
+   
         return $next($request);
     }
 }

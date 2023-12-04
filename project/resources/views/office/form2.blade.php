@@ -25,7 +25,7 @@
 
     </div>
     <div class="box-footer mt20 text-center">
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Registrar</button>
     </div>
 </div>
 

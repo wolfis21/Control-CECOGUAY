@@ -11,8 +11,8 @@ class Contracts extends Model
 
     static $rules = [
         'date_admission' => 'required',
-        'cost-semanal' => 'required',
-        'semana-cobro' => 'required',
+        'cost_semanal' => 'required',
+        'semana_cobro' => 'required',
         'atrasos' => 'required',
         'suspendido' => 'required',
         'observaciones' => 'required',
@@ -20,7 +20,7 @@ class Contracts extends Model
         'customers_id' => 'required',
     ];
 
-    protected $fillable = ["date_admission", "cost-semanal", "semana-cobro","atrasos", "suspendido","observaciones", "type_service_id","customers_id"];
+    protected $fillable = ["date_admission", "cost_semanal", "semana_cobro","atrasos", "suspendido","observaciones", "type_services_id","customers_id"];
 
     public function customer(){
         return $this->belongsTo(Customer::class, 'customers_id', 'id');

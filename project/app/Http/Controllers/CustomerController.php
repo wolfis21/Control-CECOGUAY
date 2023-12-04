@@ -17,6 +17,19 @@ class CustomerController extends Controller
             ->with('i', (request()->input('page', 1) - 1) * $customers->perPage());
     }
 
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $customers = Customer::where('name', 'like', '%' . $query . '%')
+            ->orWhere('subname', 'like', '%' . $query . '%')
+            ->orWhere('cedula', 'like', '%' . $query . '%')
+            // Agregar más campos de búsqueda si es necesario
+            ->paginate(10); // O cualquier lógica de paginación que estés usando
+
+        return view('customer.index', compact('customers'));
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -27,7 +40,7 @@ class CustomerController extends Controller
         $customer = new Customer();
         $offices = Office::all();
         return view('customer.create', compact('customer'))->with([
-            'offices'=> $offices
+            'offices' => $offices
         ]);
     }
 
@@ -40,32 +53,32 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' =>'required|string',
-            'subname' =>'required|string',
+            'name' => 'required|string',
+            'subname' => 'required|string',
             'cedula' => 'required|integer',
-            'date_n' =>'required|date',
-            'img_cedula' =>'required|image',
-            'img_partida_n' =>'required|image',
-            'sex' =>'required|string',
-            'civil_status' =>'required|string',
-            'profession_status' =>'required|string',
-            'address' =>'required|string',
-            'phone' =>'required|integer|min:8',
-            'landline' =>'required|integer|min:8',
-            'nationality' =>'required|string',
-            'date_admission' =>'required|date',
+            'date_n' => 'required|date',
+            'img_cedula' => 'required|image',
+            'img_partida_n' => 'required|image',
+            'sex' => 'required|string',
+            'civil_status' => 'required|string',
+            'profession_status' => 'required|string',
+            'address' => 'required|string',
+            'phone' => 'required|integer|min:8',
+            'landline' => 'required|integer|min:8',
+            'nationality' => 'required|string',
+            'date_admission' => 'required|date',
             'offices_id' => 'required',
         ]);
 
         $imgCedula = $request->file('img_cedula');
         $imgPartidaN = $request->file('img_partida_n');
-    
+
         // Guardar la imagen de la cedula
         $imgCedulaPath = $imgCedula->store('docs', 'storage');
-    
+
         // Guardar la imagen de la partida de nacimiento
         $imgPartidaNPath = $imgPartidaN->store('docs', 'storage');
-    
+
         // Crear el registro del cliente en la base de datos
         $customer = Customer::create([
             'name' => $request->input('name'),
@@ -85,23 +98,23 @@ class CustomerController extends Controller
             'offices_id' => $request->input('offices_id'),
         ]);
 
-                    // Obtener la fecha actual
-            $currentDate = date('d-m-y');
+        // Obtener la fecha actual
+        $currentDate = date('d-m-y');
 
-            // Crear el registro del contrato en la base de datos
-            $contract = Contracts::create([
-                'date_admission' => $currentDate,
-                'cost_semanal' => '0', // valor por defecto
-                'semana_cobro' => '0', // valor por defecto
-                'atrasos' => $currentDate, // valor por defecto
-                'suspendido' => '0', // valor por defecto
-                'observaciones' => 'No presenta', // valor por defecto
-                'type_services_id' => 1, // valor por defecto
-                'customers_id' => $customer->id, // usar el id del cliente recién creado
-            ]);
+        // Crear el registro del contrato en la base de datos
+        $contract = Contracts::create([
+            'date_admission' => $currentDate,
+            'cost_semanal' => '0', // valor por defecto
+            'semana_cobro' => '0', // valor por defecto
+            'atrasos' => $currentDate, // valor por defecto
+            'suspendido' => '0', // valor por defecto
+            'observaciones' => 'No presenta', // valor por defecto
+            'type_services_id' => 1, // valor por defecto
+            'customers_id' => $customer->id, // usar el id del cliente recién creado
+        ]);
 
-        return redirect()->route('customer.index')
-            ->with('success', 'Cliente creado con éxito.');
+        return redirect()->route('contracts.index')
+            ->with('success', 'Cliente creado y contrato iniciado con éxito.');
     }
 
     /**
@@ -131,7 +144,7 @@ class CustomerController extends Controller
 
         return view('Customer.edit', compact('customer'))->with([
             'offices' => $offices,
-            'office_customer' =>$office_customer,
+            'office_customer' => $office_customer,
         ]);;
     }
 
@@ -145,39 +158,39 @@ class CustomerController extends Controller
     public function update(Request $request, Customer $customer)
     {
         $request->validate([
-            'name' =>'required|string',
-            'subname' =>'required|string',
+            'name' => 'required|string',
+            'subname' => 'required|string',
             'cedula' => 'required|integer',
-            'date_n' =>'required|date',
-            'img_cedula' =>'required|image',
-            'img_partida_n' =>'required|image',
-            'sex' =>'required|string',
-            'civil_status' =>'required|string',
-            'profession_status' =>'required|string',
-            'address' =>'required|string',
-            'phone' =>'required|integer|min:8',
-            'landline' =>'required|integer|min:8',
-            'nationality' =>'required|string',
-            'date_admission' =>'required|date',
+            'date_n' => 'required|date',
+            'img_cedula' => 'image',
+            'img_partida_n' => 'image',
+            'sex' => 'required|string',
+            'civil_status' => 'required|string',
+            'profession_status' => 'required|string',
+            'address' => 'required|string',
+            'phone' => 'required|integer|min:8',
+            'landline' => 'required|integer|min:8',
+            'nationality' => 'required|string',
+            'date_admission' => 'required|date',
             'offices_id' => 'required',
         ]);
-    
+
         // Verificar si se enviaron nuevos archivos
         if ($request->hasFile('img_cedula')) {
             $imgCedula = $request->file('img_cedula');
             $imgCedulaPath = $imgCedula->store('docs', 'public');
             $customer->img_cedula = $imgCedulaPath;
         }
-    
+
         if ($request->hasFile('img_partida_n')) {
             $imgNacimiento = $request->file('img_partida_n');
             $imgNacimientoPath = $imgNacimiento->store('docs', 'public');
             $customer->img_nacimiento = $imgNacimientoPath;
         }
-    
+
         // Actualizar los demás campos del cliente
         $customer->update($request->all());
-    
+
         return redirect()->route('customer.index')
             ->with('success', 'Cliente actualizado con éxito.');
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Contracts;
 use App\Models\Customer;
 use App\Models\TypeService;
+use App\Models\Beneficiaries;
 use Illuminate\Http\Request;
 
 class ContractsController extends Controller
@@ -42,11 +43,12 @@ class ContractsController extends Controller
     {
         $request->validate([
             'date_admission' =>'required|date',
-            'cost-semnanal' =>'required|integer',
-            'semana-cobro' => 'required|integer',
-            'atrasos' =>'required|date',
+            'cost_semanal' =>'required|integer',
+            'semana_cobro' => 'required|string',
+            'atrasos' =>'required|integer',
             'suspendido' =>'required|string',
-            'type_services_id' =>'required|string',
+            'observaciones' => 'required|string',
+            'type_services_id' =>'required',
             'customers_id' =>'required',
         ]);
 
@@ -65,8 +67,9 @@ class ContractsController extends Controller
     public function show($id)
     {
         $contract = Contracts::find($id);
-
-        return view('contracts.show', compact('contract'));
+        $beneficiaries = Beneficiaries::where('contracts_id', $contract->id)->get();
+    
+        return view('contracts.show', compact('contract', 'beneficiaries'));
     }
 
     /**
@@ -77,15 +80,14 @@ class ContractsController extends Controller
      */
     public function edit($id)
     {
-        $contract = Contracts::find($id);
-        $customers_Contracts = Customer::find($contract->customer_id);
-        $type_Contracts = TypeService::all(); //agregar el type_contract
-             //aca añadir tambien a los beneficiarios
-
-        return view('contracts.edit', compact('contract'))->with([
-            'contract' => $contract,
-            'customer_Contracts' =>$customers_Contracts,
-            'type_Contracts'=> $type_Contracts,
+        $contracts = Contracts::find($id);
+        $customer = Customer::find($contracts->customers_id);
+        $type_Contracts = TypeService::all();
+    
+        return view('contracts.edit', [
+            'contracts' => $contracts,
+            'customer' => $customer,
+            'type_Contracts' => $type_Contracts,
         ]);
     }
 
@@ -96,22 +98,24 @@ class ContractsController extends Controller
      * @param  Contracts $Contracts
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Contracts $contracts)
+    public function update(Request $request, $id)
     {
         $request->validate([
-            'date_admission' =>'date',
-            'cost-semnanal' =>'integer',
-            'semana-cobro' => 'integer',
-            'atrasos' =>'date',
-            'suspendido' =>'string',
-            'type_services_id' =>'string',
+            'date_admission' =>'required|date',
+            'cost_semanal' =>'required|integer',
+            'semana_cobro' => 'required|string',
+            'atrasos' =>'required|integer',
+            'suspendido' =>'required|string',
+            'observaciones' => 'required|string',
+            'type_services_id' =>'required',
             'customers_id' =>'required',
         ]);
 
-        $contracts->update($request->all());
+        $contract = Contracts::find($id);
+        $contract->update($request->all());
 
         return redirect()->route('contracts.index')
-            ->with('success', 'Contracts updated successfully');
+            ->with('success', 'Contrato actualizado con exito.');
     }
 
     /**
@@ -124,6 +128,6 @@ class ContractsController extends Controller
         $Contracts = Contracts::find($id)->delete();
 
         return redirect()->route('contracts.index')
-            ->with('success', 'Contracts deleted successfully');
+            ->with('success', 'Contracto eliminado exito.');
     }
 }

@@ -13,7 +13,7 @@ class BeneficiariesController extends Controller
     {
         $beneficiaries = Beneficiaries::paginate();
 
-        return view('beneficiaries.index', compact('beneficiariess'))
+        return view('beneficiaries.index', compact('beneficiaries'))
             ->with('i', (request()->input('page', 1) - 1) * $beneficiaries->perPage());
     }
 
@@ -24,10 +24,21 @@ class BeneficiariesController extends Controller
      */
     public function create()
     {
-        $Beneficiaries = new Beneficiaries();
-        $contracts = Contracts::all();
-        return view('beneficiaries.create', compact('beneficiaries'))->with([
-            'contracts'=> $contracts
+        $beneficiaries = new Beneficiaries();
+        /* $contract = Contracts::find($beneficiaries->contracts_id); */
+        $contract = Contracts::all();
+        return view('beneficiaries.create',[ 
+            'beneficiaries' => $beneficiaries,
+            'contract' => $contract,
+        ]);
+    }
+
+    public function createWithContract($contract)
+    {
+        $beneficiaries = new Beneficiaries();
+        return view('beneficiaries.create', [ 
+            'beneficiaries' => $beneficiaries,
+            'contract' => $contract,
         ]);
     }
 
@@ -46,22 +57,49 @@ class BeneficiariesController extends Controller
             'date_n' =>'required|date',
             'sex' =>'required|string',
             'civil_status' =>'required|string',
-            'profesion' =>'required|string',
+            'professional_status' =>'required|string',
             'address' =>'required|string',
-            'phone' =>'required|integer|min:8',
-            'landline' =>'required|integer|min:8',
-            'nacionalidad' =>'required|string',
+            'phone' =>'required|integer',
+            'landline' =>'required|integer',
+            'nationality' =>'required|string',
             'date_admission' =>'required|date',
-            'img-cedula' => 'required',
-            'img-nacimiento' => 'required',
             'parentesco' => 'required',
             'contracts_id' => 'required',
         ]);
 
-        $Beneficiaries = Beneficiaries::create($request->all());
+        $imgCedula = $request->file('img_cedula');
+        $imgPartidaN = $request->file('img_partida_n');
+    
+        // Guardar la imagen de la cedula
+        $imgCedulaPath = $imgCedula->store('docs', 'storage');
+    
+        // Guardar la imagen de la partida de nacimiento
+        $imgPartidaNPath = $imgPartidaN->store('docs', 'storage');
 
-        return redirect()->route('beneficiaries.index')
-            ->with('success', 'beneficiaries created successfully.');
+        $beneficiaries = Beneficiaries::create([
+            'name' => $request->input('name'),
+            'subname' => $request->input('subname'),
+            'cedula' => $request->input('cedula'),
+            'date_n' => $request->input('date_n'),
+            'img_cedula' => $imgCedulaPath,
+            'img_partida_n' => $imgPartidaNPath,
+            'sex' => $request->input('sex'),
+            'civil_status' => $request->input('civil_status'),
+            'professional_status' => $request->input('professional_status'),
+            'address' => $request->input('address'),
+            'phone' => $request->input('phone'),
+            'landline' => $request->input('landline'),
+            'nationality' => $request->input('nationality'),
+            'date_admission' => $request->input('date_admission'),
+            'parentesco' => $request->input('parentesco'),
+            'contracts_id' => $request->input('contracts_id'),
+        ]);
+
+/*         return redirect()->route('contracts.index')
+            ->with('success', 'Beneficiario agregado con Exito.'); */
+
+            return redirect()->route('contracts.show', $request->contracts_id)
+            ->with('success', 'Beneficiario agregado con éxito.');
     }
 
     /**
@@ -86,12 +124,13 @@ class BeneficiariesController extends Controller
     public function edit($id)
     {
         $beneficiaries = Beneficiaries::find($id);
-        $contracts_Beneficiaries = Contracts::find($beneficiaries->zona_id);
+        $contracts_Beneficiaries = Contracts::find($beneficiaries->contracts_id);
         $contracts = Contracts::all(); //pensar un poco esto
 
-        return view('beneficiaries.edit', compact('beneficiaries'))->with([
+        return view('beneficiaries.edit',[
             'beneficiaries' => $beneficiaries,
             'contracts_Beneficiaries' =>$contracts_Beneficiaries,
+            'contracts' => $contracts,
         ]);;
     }
 
@@ -111,22 +150,35 @@ class BeneficiariesController extends Controller
             'date_n' =>'required|date',
             'sex' =>'required|string',
             'civil_status' =>'required|string',
-            'profesion' =>'required|string',
+            'professional_status' =>'required|string',
             'address' =>'required|string',
-            'phone' =>'required|integer|min:8',
-            'landline' =>'required|integer|min:8',
-            'nacionalidad' =>'required|string',
+            'phone' =>'required|integer',
+            'landline' =>'required|integer',
+            'nationality' =>'required|string',
             'date_admission' =>'required|date',
-            'img-cedula' => 'required',
-            'img-nacimiento' => 'required',
             'parentesco' => 'required',
             'contracts_id' => 'required',
         ]);
+        // Verificar si se enviaron nuevos archivos
+        if ($request->hasFile('img_cedula')) {
+            $imgCedula = $request->file('img_cedula');
+            $imgCedulaPath = $imgCedula->store('docs', 'public');
+            $beneficiaries->img_cedula = $imgCedulaPath;
+        }
+    
+        if ($request->hasFile('img_partida_n')) {
+            $imgNacimiento = $request->file('img_partida_n');
+            $imgNacimientoPath = $imgNacimiento->store('docs', 'public');
+            $beneficiaries->img_nacimiento = $imgNacimientoPath;
+        }
 
         $beneficiaries->update($request->all());
 
-        return redirect()->route('beneficiaries.index')
-            ->with('success', 'beneficiaries updated successfully');
+/*         return redirect()->route('beneficiaries.index')
+            ->with('success', 'beneficiaries updated successfully'); */
+
+            return redirect()->route('contracts.show', $request->contracts_id)
+            ->with('success', 'Beneficiario editado con éxito.');
     }
 
     /**
@@ -136,9 +188,14 @@ class BeneficiariesController extends Controller
      */
     public function destroy($id)
     {
-        $Beneficiaries = Beneficiaries::find($id)->delete();
+        $beneficiarier = Beneficiaries::find($id);
+        $contracts_id = $beneficiarier->contracts_id;
+        $beneficiarier->delete();
+        
+        return redirect()->route('contracts.show', $contracts_id)->with('success', 'Beneficiario eliminado con éxito.');
 
-        return redirect()->route('beneficiaries.index')
-            ->with('success', 'beneficiaries deleted successfully');
+/*         return redirect()->route('beneficiaries.index')
+            ->with('success', 'beneficiaries deleted successfully'); */
+           
     }
 }

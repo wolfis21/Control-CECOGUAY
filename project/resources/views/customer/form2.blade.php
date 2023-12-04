@@ -28,7 +28,7 @@
         </div>
         <div class="form-group">
             {{ Form::label('Estado Civil') }}
-            {{ Form::text('civil_status', $customer->civil_status, ['class' => 'form-control' . ($errors->has('civil_status') ? ' is-invalid' : ''), 'placeholder' => 'Especifique estado']) }}
+            {{ Form::select('civil_status',['Solter@' => 'Solter@', 'Casad@' => 'Casad@', 'Viud@'=>'Viud@'],$customer->civil_status, ['class' => 'form-control' . ($errors->has('civil_status') ? ' is-invalid' : ''), 'placeholder' => 'Especifique estado']) }}
             {!! $errors->first('civil_status', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
