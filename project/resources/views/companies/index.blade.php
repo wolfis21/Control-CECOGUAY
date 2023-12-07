@@ -71,10 +71,10 @@
     <div class="main" id="main" style="    margin-top: 15px;">
         <nav class="navbar bg-body-tertiary">
             <div class="container-fluid">
-              <form class="d-flex" role="search" style="    width: 83rem;">
-                <input class="form-control me-2" type="search" placeholder="Escribe..." aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Buscar</button>
-              </form>
+                <form class="d-flex" role="search" style="width: 83rem;" action="{{ route('companies.search') }}" method="GET">
+                    <input class="form-control me-2" type="search" placeholder="Escriba numero de contrato..." aria-label="Search" name="query">
+                    <button class="btn btn-outline-success" type="submit">Buscar</button>
+                </form>
             </div>
           </nav>
         <div class="row">

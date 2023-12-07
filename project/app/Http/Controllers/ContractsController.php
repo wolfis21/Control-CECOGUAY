@@ -19,6 +19,18 @@ class ContractsController extends Controller
             ->with('i', (request()->input('page', 1) - 1) * $contracts->perPage());
     }
 
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $contracts = Contracts::where('id', 'like', '%' . $query . '%')
+ /*            ->orWhere('subname', 'like', '%' . $query . '%')
+            ->orWhere('cedula', 'like', '%' . $query . '%') */
+            // Agregar más campos de búsqueda si es necesario
+            ->paginate(10); // O cualquier lógica de paginación que estés usando
+
+        return view('contracts.index', compact('contracts'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

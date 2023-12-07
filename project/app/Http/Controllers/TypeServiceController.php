@@ -15,6 +15,17 @@ class TypeServiceController extends Controller
         return view('typeServices.index', compact('typeServices'))
             ->with('i', (request()->input('page', 1) - 1) * $typeServices->perPage());
     }
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $typeServices = TypeService::where('name', 'like', '%' . $query . '%')
+/*             ->orWhere('subname', 'like', '%' . $query . '%')
+            ->orWhere('cedula', 'like', '%' . $query . '%') */
+            // Agregar más campos de búsqueda si es necesario
+            ->paginate(10); // O cualquier lógica de paginación que estés usando
+
+        return view('typeServices.index', compact('typeServices'));
+    }
 
     /**
      * Show the form for creating a new resource.

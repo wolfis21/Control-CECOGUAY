@@ -9,6 +9,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\OfficeController;
 use App\Http\Controllers\TypeServiceController;
 use App\Http\Controllers\BeneficiariesController;
+use App\Http\Controllers\ImprimirController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,15 +39,18 @@ Route::group(['middleware' => 'check.position:administrador'], function () {
         return view('dashboard/dashboardAdmin');
     });
     /* gestion de empresa */
+    Route::get('/companies/search', '\App\Http\Controllers\CompaniesController@search')->name('companies.search');
     Route::resource('companies', CompaniesController::class);
     
     /* gestion de oficinas */
     Route::resource('offices', OfficeController::class);
     
     /* gestion de empleados */
+    Route::get('/employee/search', '\App\Http\Controllers\EmployeeController@search')->name('employee.search');
     Route::resource('employee',EmployeeController::class);
     
     /* gestion de type-service */
+    Route::get('/typeService/search', '\App\Http\Controllers\TypeServiceController@search')->name('typeService.search');
     Route::resource('typeService',TypeServiceController::class);
 });
 
@@ -64,11 +68,15 @@ Route::group(['middleware' => 'check.position:usuario'], function () {
 
     
     /* gestion de contratos */
+    Route::get('/contracts/search', '\App\Http\Controllers\ContractsController@search')->name('contracts.search');
     Route::resource('contracts',ContractsController::class);
 
     /* gestion de beneficiarios */
+    Route::get('beneficiaries/create/{contract}', '\App\Http\Controllers\BeneficiariesController@createWithContract')->name('beneficiaries.createWithContract');
     Route::resource('beneficiaries', BeneficiariesController::class);
-    /* Route::get('beneficiaries/createWithContract/{contract}', 'BeneficiariesController@createWithContract')->name('beneficiaries.createWithContract'); */
+
+    /* pdf generated */
+    Route::get('imprimir/{id}', '\App\Http\Controllers\ImprimirController@imprimir')->name('imprimir');
 
 });
 

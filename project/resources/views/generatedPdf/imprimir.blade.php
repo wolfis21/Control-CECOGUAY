@@ -1,34 +1,82 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>REPORTE</title>
+    <style>
+        .float-right {
+            float: inline-end;
+        }
 
-@section('template_title')
-    {{ $customer->name ?? 'Datos Cliente:' }}
-@endsection
+        .float-right a {
+            font-size: 14px;
+        }
 
-@section('content')
+        .form-control {
+            font-size: 14px !important;
+        }
+
+        .card-body {
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+            justify-content: space-evenly;
+            padding: 0 20px 20px 20px;
+        }
+        .card-header, .card-footer {
+            border-color: #ebeef4;
+            background-color: #fff;
+            color: #798eb3;
+            padding: 15px;
+        }
+        .card {
+            --bs-card-spacer-y: 1rem;
+            --bs-card-spacer-x: 1rem;
+            --bs-card-title-spacer-y: 0.5rem;
+            --bs-card-border-width: 1px;
+            --bs-card-border-color: var(--bs-border-color-translucent);
+            --bs-card-border-radius: 0.375rem;
+            --bs-card-box-shadow: ;
+            --bs-card-inner-border-radius: calc(0.375rem - 1px);
+            --bs-card-cap-padding-y: 0.5rem;
+            --bs-card-cap-padding-x: 1rem;
+            --bs-card-cap-bg: rgba(0, 0, 0, 0.03);
+            --bs-card-cap-color: ;
+            --bs-card-height: ;
+            --bs-card-color: ;
+            --bs-card-bg: #fff;
+            --bs-card-img-overlay-padding: 1rem;
+            --bs-card-group-margin: 0.75rem;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            height: var(--bs-card-height);
+            word-wrap: break-word;
+            background-color: var(--bs-card-bg);
+            background-clip: border-box;
+            border: var(--bs-card-border-width) solid var(--bs-card-border-color);
+            border-radius: var(--bs-card-border-radius);
+        }
+
+    </style>
+</head>
+<body>
     <div class="main" id="main" style="margin-top: 30px;">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
-
-                            <span id="card_title">
+                            <span id="card_title" style="">
                                 {{ __('Contrato Funerario') }}
                             </span>
-
-                            <div class="float-right">
-                                <a href="{{ route('imprimir', ['id' => $contract->id]) }}" target="_blank" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                    {{ __('Imprimir contrato') }}
-                                </a>
-                            </div>
-
                         </div>
                     </div>
                     {{-- Section contrato --}}
                     <div class="card-body">
                         <div class="form-group" style="display: flex; flex-wrap: nowrap; justify-content: space-evenly; align-items: center;">
-                            <strong style="    width: 12rem;">Contrato No</strong>
-                            <div class="form-control">{{ $contract->id }}</div>
+                            <div><strong style="width: 12rem;">Contrato No: </strong>{{ $contract->id }}</div>
                         </div>
                         <div class="form-group" style="display: flex; flex-wrap: nowrap; justify-content: space-evenly; align-items: center;">
                             <strong style="    width: 15rem;">Fecha de Ingreso</strong>
@@ -45,9 +93,6 @@
                             </div>
                         </div>
                     </div>
-
-
-
                     {{-- section cliente --}}
                     <div class="card">
                         <div class="card-header">
@@ -89,7 +134,6 @@
                                     <strong>Direccion</strong>
                                     <div class="form-control">{{ $contract->customer->address }}</div>
                                 </div>
-    
                                 
                             </div>
                             <div class="card-body">
@@ -100,45 +144,20 @@
                             </div>
                         </div>
                     </div>
-
-                    {{-- section 2 --}}
-
-
-
                 </div>
             </div>
         </div>
-        <div style="  margin-top: -60px; padding: 0;">
+        <div style="margin-top: -60px; padding: 0;">
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header">
                             <div style="display: flex; justify-content: space-between; align-items: center;">
-
                                 <span id="card_title">
                                     {{ __('Beneficiarios') }}
                                 </span>
-
-{{--                                 <div class="float-right">
-                                    <a href="{{ route('beneficiaries.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                      {{ __('Agregar beneficiario') }}
-                                    </a>
-                                </div> --}}
-
-                                <div class="float-right">
-                                    <a href="{{ route('beneficiaries.createWithContract', ['contract' => $contract->id]) }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                        {{ __('Agregar beneficiario') }}
-                                    </a>
-                                </div>
-                                
                             </div>
                         </div>
-                        @if ($message = Session::get('success'))
-                            <div class="alert alert-success">
-                                <p>{{ $message }}</p>
-                            </div>
-                        @endif
-
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-striped table-hover">
@@ -163,23 +182,7 @@
                                                 <td>{{ $beneficiarie->date_n}}</td>
                                                 <td>{{ $beneficiarie->date_admission}}</td>
                                                 <td>{{ $beneficiarie->phone}}</td>
-                                            {{-- <td>{{ $beneficiarie->typeService->name}}</td> --}}
 
-{{--                                             <td>001</td>
-                                            <td>Lopez Maria</td>
-                                            <td>1234567</td>
-                                            <td>Madre</td>
-                                            <td>04/08/1980</td>
-                                            <td>{{ $contract->customer->name }} {{ $contract->customer->subname }}</td>
- --}}
-                                            <td>
-                                                <form action="{{ route('beneficiaries.destroy', $beneficiarie->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-success" href="{{ route('beneficiaries.edit', $beneficiarie->id) }}"><i class="fa fa-fw fa-edit"></i> Editar</a>
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Eliminar</button>
-                                                </form>
-                                            </td>
                                         </tr>
                                          @endforeach
                                     </tbody>
@@ -201,38 +204,10 @@
                             </div>
                         </div>
                     </div>
-                    {{-- {!! $contracts->links() !!} --}}
                 </div>
             </div>
-            {{-- </section> --}}
         </div>
+    </div>
+</body>
+</html>
 
-        <style>
-            .float-right {
-                float: inline-end;
-
-            }
-
-            .float-right a {
-                font-size: 14px;
-            }
-
-            .form-control {
-                font-size: 14px !important;
-            }
-/*             .form-group{
-                display: flex;
-                flex-wrap: nowrap;
-                align-items: center;
-                align-content: stretch;
-                flex-direction: row;
-            } */
-
-            .card-body {
-                display: flex;
-                flex-wrap: wrap;
-                flex-direction: row;
-                justify-content: space-evenly;
-            }
-        </style>
-    @endsection

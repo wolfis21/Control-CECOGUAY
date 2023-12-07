@@ -36,6 +36,7 @@ class BeneficiariesController extends Controller
     public function createWithContract($contract)
     {
         $beneficiaries = new Beneficiaries();
+        $contract = Contracts::find($contract);
         return view('beneficiaries.create', [ 
             'beneficiaries' => $beneficiaries,
             'contract' => $contract,

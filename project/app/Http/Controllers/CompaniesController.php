@@ -17,6 +17,21 @@ class CompaniesController extends Controller
             ->with(['i', (request()->input('page', 1) - 1) * $companiess->perPage(),
             'offices' => $offices,]);
     }
+    public function search(Request $request)
+    {
+        $companiess = Companies::paginate();
+        $query = $request->input('query');
+        $offices = Office::where('address', 'like', '%' . $query . '%')
+ /*            ->orWhere('subname', 'like', '%' . $query . '%')
+            ->orWhere('cedula', 'like', '%' . $query . '%') */
+            // Agregar más campos de búsqueda si es necesario
+            ->paginate(10); // O cualquier lógica de paginación que estés usando
+
+        /* return view('companies.index', compact('offices')); */
+        return view('companies.index', compact('companiess'))
+        ->with(['i', (request()->input('page', 1) - 1) * $companiess->perPage(),
+        'offices' => $offices,]);
+    }
 
     /**
      * Show the form for creating a new resource.

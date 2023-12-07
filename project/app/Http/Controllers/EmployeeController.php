@@ -16,6 +16,17 @@ class EmployeeController extends Controller
         return view('employee.index', compact('employees'))
             ->with('i', (request()->input('page', 1) - 1) * $employees->perPage());
     }
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $employees = Employee::where('name', 'like', '%' . $query . '%')
+            ->orWhere('subname', 'like', '%' . $query . '%')
+            ->orWhere('cedula', 'like', '%' . $query . '%')
+            // Agregar más campos de búsqueda si es necesario
+            ->paginate(10); // O cualquier lógica de paginación que estés usando
+
+        return view('employee.index', compact('employees'));
+    }
 
     /**
      * Show the form for creating a new resource.

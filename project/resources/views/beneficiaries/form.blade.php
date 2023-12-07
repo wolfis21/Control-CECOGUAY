@@ -72,7 +72,7 @@
             {!! $errors->first('img_partida_n', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         
-        <div class="form-group" style="    width: 12rem;>">
+{{--         <div class="form-group" style="    width: 12rem;>">
             <label>Asignar contrato</label>
             <select name="contracts_id" class="form-control"  id="contracts" >
                 @if($contract->count() > 0)
@@ -82,9 +82,9 @@
                      @endforeach
                 @endif
             </select>
-        </div>
+        </div> --}}
 
-        {{-- <input type="hidden" name="contracts_id" value="{{ $contractId }}"> --}}
+        <input type="hidden" name="contracts_id" value="{{ $contract->id }}">
 
         <div class="form-group custom-from" >
             {{ Form::label('Parentesco') }}
