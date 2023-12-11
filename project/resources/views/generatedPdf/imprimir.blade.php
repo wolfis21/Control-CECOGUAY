@@ -29,6 +29,10 @@
             color: #798eb3;
             padding: 15px;
         }
+        .card-header{
+            border-bottom: 2px solid black;
+            padding-bottom: 15px;
+        }
         .card {
             --bs-card-spacer-y: 1rem;
             --bs-card-spacer-x: 1rem;
@@ -58,6 +62,21 @@
             border: var(--bs-card-border-width) solid var(--bs-card-border-color);
             border-radius: var(--bs-card-border-radius);
         }
+        #card_title{
+            font-size: 20px;
+            font-weight: bold;
+            color: black
+        }
+        th,td {
+            padding-left: 24px;
+        }
+        .thead{
+            border-bottom: 1px solid black;
+            
+        }
+        th{
+            padding-bottom: 10px;
+        }
 
     </style>
 </head>
@@ -65,41 +84,50 @@
     <div class="main" id="main" style="margin-top: 30px;">
         <div class="row">
             <div class="col-md-12">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span id="card_title" style="padding-left:150px;">
+                        {{ __('Al FONDO DE PROTECCION FAMILIAR') }}
+                    </span>
+                </div>
                 <div class="card">
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <span id="card_title" style="">
-                                {{ __('Contrato Funerario') }}
+                            <span id="card_title" style="padding-top:20px;">
+                                {{ __('CONTRATO FUNERARIO') }}
                             </span>
                         </div>
                     </div>
                     {{-- Section contrato --}}
                     <div class="card-body">
                         <div class="form-group" style="display: flex; flex-wrap: nowrap; justify-content: space-evenly; align-items: center;">
-                            <div><strong style="width: 12rem;">Contrato No: </strong>{{ $contract->id }}</div>
-                        </div>
-                        <div class="form-group" style="display: flex; flex-wrap: nowrap; justify-content: space-evenly; align-items: center;">
-                            <strong style="    width: 15rem;">Fecha de Ingreso</strong>
-                            <div class="form-control">{{ $contract->date_admission }}</div>
-                        </div>
-                        <div class="form-group" style="display: flex; flex-wrap: nowrap; justify-content: space-evenly; align-items: center;">
-                            <strong style="    width: 15rem;">Tipo de servicio</strong>
-                            <div class="form-control">
+                            <div><strong style="width: 12rem;">Acuerdo No: </strong>{{ $contract->id }} 
+                                <strong style=" width: 15rem; padding-left:50px;">Fecha de Incorporacion: </strong>{{ $contract->date_admission }}
+                                <strong style=" width: 15rem; padding-left:60px;">Tipo de servicio: </strong>
                                 @if ($contract->typeService)
                                     {{ $contract->typeService->name }}
                                 @else
                                     No especificado
-                                @endif
-                            </div>
+                                @endif</div> 
                         </div>
                     </div>
+{{--                     <div class="card-body">
+                        <div class="form-group">
+                            <div><strong>Costo semanal: </strong>{{ $contract->cost_semanal }}</div>
+                        </div>
+                        <div class="form-group">
+                            <div><strong>Semana de Cobro: </strong>{{ $contract->semana_cobro }}</div>
+                        </div>
+                        <div class="form-group">
+                            <div><strong>Suspendido: </strong>{{ $contract->suspendido }}</div>
+                        </div>
+                    </div> --}}
                     {{-- section cliente --}}
                     <div class="card">
                         <div class="card-header">
                             <div style="display: flex; justify-content: space-between; align-items: center;">
 
                                 <span id="card_title">
-                                    {{ __('Datos de Cliente') }}
+                                    {{ __('DATOS DEL APORTANTE') }}
                                 </span>
 
                             </div>
@@ -107,54 +135,35 @@
                         <div class="card-custom-add">
                             <div class="card-body">
     
-                                <div class="form-group">
-                                    <strong>Cedula</strong>
-                                    <div class="form-control">{{ $contract->customer->cedula }}</div>
-    
+                                <div class="form-group" style="padding-bottom: 5px;">
+                                    <div><strong>Cedula: </strong>{{ $contract->customer->cedula }}
+                                        <strong style=" width: 15rem; padding-left:50px;">Apellidos y Nombres: </strong>{{ $contract->customer->name }} {{ $contract->customer->subname }}</div>
                                 </div>
-                                <div class="form-group">
-                                    <strong>Apellidos y Nombres</strong>
-                                    <div class="form-control">{{ $contract->customer->name }} {{ $contract->customer->subname }}
-                                    </div>
+                                <div class="form-group" style="padding-bottom: 5px;">
+                                    <div><strong>Fecha de nacimiento: </strong>{{ $contract->customer->date_n }}
+                                        <strong style=" width: 15rem; padding-left:50px;">Direccion: </strong>{{ $contract->customer->address }}</div>
                                 </div>
-    
-                                <div class="form-group">
-                                    <strong>Fecha de nacimiento</strong>
-                                    <div class="form-control">{{ $contract->customer->date_n }}</div>
-    
-                                </div>
-    
-                                <div class="form-group">
-                                    <strong>Telefono</strong>
-                                    <div class="form-control">{{ $contract->customer->phone }}</div>
-    
-                                </div>
-    
-                                <div class="form-group" style="    width: 31rem;">
-                                    <strong>Direccion</strong>
-                                    <div class="form-control">{{ $contract->customer->address }}</div>
+                                <div class="form-group" style="padding-bottom: 5px;">
+                                    <div><strong>Observaciones: </strong>{{ $contract->observaciones }}</div>
+                                </div>                                
+                                <div class="form-group" style="padding-bottom: 5px;">
+                                    <div><strong>Telefono: </strong>{{ $contract->customer->phone }}</div>
                                 </div>
                                 
-                            </div>
-                            <div class="card-body">
-                                <div class="form-group" style="width: 45rem;">
-                                    <strong>Observaciones</strong>
-                                    <div class="form-control">{{ $contract->observaciones }}</div>
-                                </div>                                
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div style="margin-top: -60px; padding: 0;">
+        <div style="">
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header">
                             <div style="display: flex; justify-content: space-between; align-items: center;">
                                 <span id="card_title">
-                                    {{ __('Beneficiarios') }}
+                                    {{ __('BENEFICIARIOS CON DERECHO AL SERVICIO') }}
                                 </span>
                             </div>
                         </div>
@@ -167,21 +176,21 @@
                                             <th>Apellidos y Nombres</th>
                                             <th>Cedula</th>
                                             <th>Parentesco</th>
-                                            <th>Fecha de Nacimiento</th>
-                                            <th>Fecha de Ingreso</th>
-                                            <th>Telefono</th> 
+                                            <th>Fecha de Ing.</th>
+                                            <th>Fecha de Nac.</th>
+                                            {{-- <th>Telefono</th>  --}}
                                         </tr>
                                     </thead>
                                     <tbody>
                                          @foreach ($beneficiaries as $beneficiarie)
                                         <tr>
                                                 <td>{{ $beneficiarie->id }}</td>
-                                                <td>{{ $beneficiarie->name }} {{ $beneficiarie->subname }}</td>
+                                                <td>{{ $beneficiarie->subname }} {{ $beneficiarie->name }}</td>
                                                 <td>{{ $beneficiarie->cedula }}</td>
                                                 <td>{{ $beneficiarie->parentesco }}</td>
-                                                <td>{{ $beneficiarie->date_n}}</td>
                                                 <td>{{ $beneficiarie->date_admission}}</td>
-                                                <td>{{ $beneficiarie->phone}}</td>
+                                                <td>{{ $beneficiarie->date_n}}</td>
+                                                {{-- <td>{{ $beneficiarie->phone}}</td> --}} {{-- EDAD? --}}
 
                                         </tr>
                                          @endforeach
@@ -189,20 +198,17 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="card-body">
+{{--                         <div class="card-body">
                             <div class="form-group">
-                                <strong>Costo semanal</strong>
-                                <div class="form-control">{{ $contract->cost_semanal }}</div>
+                                <div><strong>Costo semanal: </strong>{{ $contract->cost_semanal }}</div>
                             </div>
                             <div class="form-group">
-                                <strong>Semana de Cobro</strong>
-                                <div class="form-control">{{ $contract->semana_cobro }}</div>
+                                <div><strong>Semana de Cobro: </strong>{{ $contract->semana_cobro }}</div>
                             </div>
                             <div class="form-group">
-                                <strong>Suspendido</strong>
-                                <div class="form-control">{{ $contract->suspendido }}</div>
+                                <div><strong>Suspendido: </strong>{{ $contract->suspendido }}</div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
