@@ -5,12 +5,12 @@
         <div class="form-group">
             {{ Form::label('Ubicacion de Sede') }}
             {{ Form::text('address', $office->address, ['class' => 'form-control' . ($errors->has('address') ? ' is-invalid' : ''), 'placeholder' => 'Ingrese direccion']) }}
-            {!! $errors->first('address', '<div class="invalid-feedback">:message</div>') !!}
+            {!! $errors->first('address', '<div class="invalid-feedback">Direccion requerida</div>') !!}
         </div>
         <div class="form-group" style="    padding-top: 10px;">
             {{ Form::label('Numero de Contacto') }}
             {{ Form::number('num_contact', $office->num_contact, ['class' => 'form-control' . ($errors->has('num_contact') ? ' is-invalid' : ''), 'placeholder' => 'Ingrese n. contacto']) }}
-            {!! $errors->first('num_contact', '<div class="invalid-feedback">:message</div>') !!}
+            {!! $errors->first('num_contact', '<div class="invalid-feedback">Numero requerido</div>') !!}
         </div>
         <div class="form-group" style="    padding-top: 10px;">
             <label for="statu">Agregar Empresa</label>

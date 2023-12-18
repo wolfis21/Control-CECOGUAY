@@ -42,7 +42,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($companiess as $company)
+                                    @foreach ($companies as $company)
                                         <tr>
 											<td>{{ $company->rif_companies }}</td>
 											<td>{{ $company->name }}</td>
@@ -64,7 +64,7 @@
                         </div>
                     </div>
                 </div>
-                {!! $companiess->links() !!}
+                {!! $companies->links() !!}
             </div>
         </div>
     </div>

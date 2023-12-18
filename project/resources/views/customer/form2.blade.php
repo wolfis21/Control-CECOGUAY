@@ -86,7 +86,7 @@
          
     </div>
     <div class="box-footer mt20 text-center" style="padding-top: 15px;">
-        <button type="submit" class="btn btn-primary">Registrar</button>
+        <button type="submit" class="btn btn-primary">Actualizar</button>
     </div>
 </div>
 
@@ -112,5 +112,15 @@
     }
     label{
         font-weight: bold;
+    }
+    @media (max-width:1440px){
+        .responsive-form{
+            width: 45%;
+        }
+    }
+    @media (max-width:1024px){
+        .responsive-form{
+            width: 60%;
+        }
     }
 </style>

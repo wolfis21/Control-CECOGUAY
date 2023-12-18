@@ -53,7 +53,7 @@ class TypeServiceController extends Controller
         $typeService =TypeService::create($request->all());
 
         return redirect()->route('typeService.index')
-            ->with('success', 'type Service created successfully.');
+            ->with('success', 'Tipo de Servicio creado con éxito.');
     }
 
     /**
@@ -99,7 +99,7 @@ class TypeServiceController extends Controller
           $typeService->update($request->all());
 
         return redirect()->route('typeService.index')
-            ->with('success', 'type Service updated successfully');
+            ->with('success', 'Tipo de Servicio actualizado con éxito.');
     }
 
     /**
@@ -112,6 +112,6 @@ class TypeServiceController extends Controller
         $typeService =TypeService::find($idTypeService)->delete();
 
         return redirect()->route('typeService.index')
-            ->with('success', 'Type Service deleted successfully');
+            ->with('success', 'Tipo de Servicio eliminado con éxito.');
     }
 }

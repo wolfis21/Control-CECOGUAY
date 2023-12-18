@@ -7,12 +7,12 @@
             {!! $errors->first('cedula', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('name') }}
+            {{ Form::label('nombres') }}
             {{ Form::text('name', $employee->name, ['class' => 'form-control' . ($errors->has('name') ? ' is-invalid' : ''), 'placeholder' => 'nombre employee']) }}
             {!! $errors->first('name', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('subname') }}
+            {{ Form::label('apellidos') }}
             {{ Form::text('subname', $employee->subname, ['class' => 'form-control' . ($errors->has('subname') ? ' is-invalid' : ''), 'placeholder' => 'apellido employee']) }}
             {!! $errors->first('subname', '<div class="invalid-feedback">:message</div>') !!}
         </div>
@@ -66,6 +66,6 @@
          
     </div>
     <div class="box-footer mt20 text-center">
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Actualizar</button>
     </div>
 </div>

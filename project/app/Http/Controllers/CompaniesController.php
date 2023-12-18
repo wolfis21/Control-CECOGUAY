@@ -10,16 +10,16 @@ class CompaniesController extends Controller
 {
     public function index()
     {
-        $companiess = Companies::paginate();
+        $companies = Companies::paginate();
         $offices = Office::all();
 
-        return view('companies.index', compact('companiess'))
-            ->with(['i', (request()->input('page', 1) - 1) * $companiess->perPage(),
+        return view('companies.index', compact('companies'))
+            ->with(['i', (request()->input('page', 1) - 1) * $companies->perPage(),
             'offices' => $offices,]);
     }
     public function search(Request $request)
     {
-        $companiess = Companies::paginate();
+        $companies = Companies::paginate();
         $query = $request->input('query');
         $offices = Office::where('address', 'like', '%' . $query . '%')
  /*            ->orWhere('subname', 'like', '%' . $query . '%')
@@ -28,8 +28,8 @@ class CompaniesController extends Controller
             ->paginate(10); // O cualquier lógica de paginación que estés usando
 
         /* return view('companies.index', compact('offices')); */
-        return view('companies.index', compact('companiess'))
-        ->with(['i', (request()->input('page', 1) - 1) * $companiess->perPage(),
+        return view('companies.index', compact('companies'))
+        ->with(['i', (request()->input('page', 1) - 1) * $companies->perPage(),
         'offices' => $offices,]);
     }
 
@@ -83,9 +83,9 @@ class CompaniesController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($idCompanies)
+    public function edit($id)
     {
-        $companies = Companies::find($idCompanies);
+        $companies = Companies::find($id);
 
         return view('companies.edit', compact('companies'));
     }
@@ -100,16 +100,18 @@ class CompaniesController extends Controller
     public function update(Request $request, Companies $companies)
     { 
         $request->validate([
-        'rif_companies' => 'required|integer|min:8',
-        'name' =>'required|string',
-        'description' =>'required|string',
-        'num_contact' =>'required|integer|min:8',
+        'rif_companies' => 'required',
+        'name' =>'required',
+        'description' =>'required',
+        'num_contact' =>'required',
         ]);
         
+        var_dump($companies->id);
+
         $companies->update($request->all());
 
         return redirect()->route('companies.index')
-            ->with('success', 'Empresa actualizada con éxito');
+            ->with('success', 'Empresa actualizada con éxito'. $companies->id);
     }
 
     /**

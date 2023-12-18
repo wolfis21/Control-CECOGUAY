@@ -55,7 +55,7 @@
         </div>
     </div>
     <div class="box-footer mt20 text-center">
-        <button type="submit" class="btn btn-primary">Registrar</button>
+        <button type="submit" class="btn btn-primary">Actualizar</button>
     </div>
 </div>
 
