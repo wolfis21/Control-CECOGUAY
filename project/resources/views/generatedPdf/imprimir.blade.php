@@ -77,6 +77,14 @@
         th{
             padding-bottom: 10px;
         }
+        .img-custom{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .img-adj{
+            padding-top: 5rem;
+        }
 
     </style>
 </head>
@@ -214,6 +222,29 @@
             </div>
         </div>
     </div>
+    <div class="img-adj">
+        <!-- Mostrar la imagen de la cédula del cliente -->
+        <div class="img-custom">
+            Cedula Cliente:
+            <img src="data:image;base64, {{ $imgCedulaBase64 }}" alt="Cédula">
+        </div>
+
+        <!-- Mostrar la imagen de la partida de nacimiento del cliente -->
+        <div class="img-custom">
+            Partida de Nacimiento cliente:
+            <img src="data:image;base64, {{ $imgPartNBase64 }}" alt="Partida de nacimiento">
+        </div>
+
+        <!-- Mostrar las imágenes de la cédula y partida de nacimiento de los beneficiarios -->
+        <div class="img-custom">
+            Documentos de Beneficiarios:
+            @foreach ($beneficiaries as $beneficiarie)
+                <img src="data:image;base64, {{ $beneficiarie->img_cedula_base64 }}" alt="Cédula de Beneficiario">
+                <img src="data:image;base64, {{ $beneficiarie->img_partida_base64 }}" alt="Partida de nacimiento de Beneficiario">
+            @endforeach
+        </div>
+    </div>
+
 </body>
 </html>
 

@@ -5,55 +5,64 @@
 @endsection
 
 @section('content')
-    <section class="content container-fluid">
+    <div class="main" id="main" style="margin-top: 30px;">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="float-left">
-                            <span class="card-title">Datos Cliente:</span>
-                        </div>
-                        <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('customer.index') }}"> Volver</a>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div class="float-left">
+                                <span class="card-title">Datos Cliente:</span>
+                            </div>
+                            <div class="float-right">
+                                <a class="btn btn-primary" href="{{ route('customer.index') }}"> Volver</a>
+                            </div>
                         </div>
                     </div>
 
                     {{-- section cliente --}}
-                    <div class="title-customer">
-                        Datos Cliente:
-                    </div>
                     <div class="card-body">
 
                         <div class="form-group">
                             <strong>Cedula:</strong>
-                            <div class="form-control">{{ $customer->cedula }}</div>
+                            {{ $customer->cedula }}
 
                         </div>
                         <div class="form-group">
                             <strong>Apellidos y Nombres:</strong>
-                            <div class="form-control">{{ $customer->subname }} {{ $customer->name }}</div>
+                            {{ $customer->subname }} {{ $customer->name }}
                         </div>
-{{--                         <div class="form-group">
-                            <strong>Apellidos:</strong>
-                            <div class="form-control">{{ $customer->subname }}</div>
 
-                        </div> --}}
                         <div class="form-group">
                             <strong>Fecha de nacimiento:</strong>
-                            <div class="form-control">{{ $customer->date_n }}</div>
+                            {{ $customer->date_n }}
 
                         </div>
 
                         <div class="form-group">
                             <strong>Direccion:</strong>
-                            <div class="form-control">{{ $customer->address }}</div>
+                            {{ $customer->address }}
 
                         </div>
 
                         <div class="form-group">
                             <strong>Telefono:</strong>
-                            <div class="form-control">{{ $customer->phone }}</div>
+                            {{ $customer->phone }}
 
+                        </div>
+
+                        <div class="form-group img-custom">
+                            <strong>cedula:</strong>
+                            <a href="{{ asset('storage/' . $customer->img_cedula) }}" target="_blank">
+                                <img style="    width: 15rem;" src="{{ asset('storage/' . $customer->img_cedula) }}" alt="Cédula">
+                            </a>
+                        </div>
+
+                        <div class="form-group img-custom">
+                            <strong>partida:</strong>
+                            <a href="{{ asset('storage/' . $customer->img_partida_n) }}" target="_blank">
+                                <img style="    width: 15rem;" src="{{ asset('storage/' . $customer->img_partida_n) }}" alt="Partida de nacimiento">
+                            </a>
                         </div>
 
                     </div>
@@ -61,7 +70,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
     <style>
         .float-right {
@@ -77,9 +86,13 @@
 
         .card-body {
             display: flex;
-            flex-wrap: wrap;
-            flex-direction: row;
-            justify-content: space-evenly;
+            flex-wrap: wrap; 
+            flex-direction: column;
+        }
+        .img-custom{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
         }
     </style>
 @endsection

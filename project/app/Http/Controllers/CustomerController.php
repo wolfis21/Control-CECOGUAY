@@ -55,7 +55,7 @@ class CustomerController extends Controller
         $request->validate([
             'name' => 'required|string',
             'subname' => 'required|string',
-            'cedula' => 'required|integer',
+            'cedula' => 'required|integer|min:7',
             'date_n' => 'required|date',
             'img_cedula' => 'required|image',
             'img_partida_n' => 'required|image',
@@ -160,7 +160,7 @@ class CustomerController extends Controller
         $request->validate([
             'name' => 'required|string',
             'subname' => 'required|string',
-            'cedula' => 'required|integer',
+            'cedula' => 'required|integer|min:7',
             'date_n' => 'required|date',
             'img_cedula' => 'image',
             'img_partida_n' => 'image',

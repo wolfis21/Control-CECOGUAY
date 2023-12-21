@@ -4,12 +4,12 @@
         <div class="form-group">
             {{ Form::label('Ubicacion de Oficina') }}
             {{ Form::text('address', $office->address, ['class' => 'form-control' . ($errors->has('address') ? ' is-invalid' : ''), 'placeholder' => 'ingrese direccion']) }}
-            {!! $errors->first('address', '<div class="invalid-feedback">:message</div>') !!}
+            {!! $errors->first('address', '<div class="invalid-feedback">Ingrese Direccion</div>') !!}
         </div>
         <div class="form-group">
             {{ Form::label('Numero de Contacto') }}
             {{ Form::number('num_contact', $office->num_contact, ['class' => 'form-control' . ($errors->has('num_contact') ? ' is-invalid' : ''), 'placeholder' => 'contacto de sede']) }}
-            {!! $errors->first('num_contact', '<div class="invalid-feedback">:message</div>') !!}
+            {!! $errors->first('num_contact', '<div class="invalid-feedback">Número de contacto debe tener al menos 8 caracteres.</div>') !!}
         </div>
         <div class="form-group">
             <label for="statu">Agregar Empresa</label>
