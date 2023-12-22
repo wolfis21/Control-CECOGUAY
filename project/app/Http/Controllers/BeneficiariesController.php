@@ -161,7 +161,7 @@ class BeneficiariesController extends Controller
             'contracts_id' => 'required',
         ]);
         $beneficiaries = Beneficiaries::find($id);
-        
+
         $beneficiaries->fill($request->except('img_cedula', 'img_partida_n'));
         
         // Verificar si se enviaron nuevos archivos
@@ -179,7 +179,7 @@ class BeneficiariesController extends Controller
              
             $beneficiaries->save();
 
-            return redirect()->route('contracts.show', $request->contracts_id)
+            return redirect()->route('contracts.show')
             ->with('success', 'Beneficiario editado con éxito.');
     }
 

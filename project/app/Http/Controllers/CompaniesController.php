@@ -111,7 +111,7 @@ class CompaniesController extends Controller
         $companies->update($request->all());
 
         return redirect()->route('companies.index')
-            ->with('success', 'Empresa actualizada con éxito'. $companies->id);
+            ->with('success', 'Empresa actualizada con éxito');
     }
 
     /**
