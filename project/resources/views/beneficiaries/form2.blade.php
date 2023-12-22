@@ -1,6 +1,7 @@
 <div class="box box-info padding-1">
     <div class="box-body customer-form">
-        
+        <input type="hidden" name="contracts_id" value="{{ $contracts_Beneficiaries->id }}">
+
         <div class="form-group">
             {{ Form::label('Nombres') }}
             {{ Form::text('name', $beneficiaries->name, ['class' => 'form-control' . ($errors->has('name') ? ' is-invalid' : ''), 'placeholder' => 'Escribas nombres']) }}
@@ -61,40 +62,26 @@
             {{ Form::date('date_admission', date('Y-m-d'), ['class' => 'form-control' . ($errors->has('date_admission') ? ' is-invalid' : ''), 'placeholder' => 'Fecha de ingreso']) }}
             {!! $errors->first('date_admission', '<div class="invalid-feedback">:message</div>') !!}
         </div>
-{{--         <div class="form-group add-img">
+        <div class="form-group add-img">
             {{ Form::label('Adjuntar Cedula') }} 
-            {{ Form::file('img_cedula', $beneficiaries->img_cedula, ['class' => 'form-control' . ($errors->has('img_cedula') ? ' is-invalid' : ''), 'placeholder' => 'img_cedula']) }}
+            {{ Form::file('img_cedula', ['class' => 'form-control' . ($errors->has('img_cedula') ? ' is-invalid' : ''), 'placeholder' => 'img_cedula']) }}
             {!! $errors->first('img_cedula', '<div class="invalid-feedback">:message</div>') !!}
         </div>        
         <div class="form-group add-img">
             {{ Form::label('Adjuntar Partida') }} 
-            {{ Form::file('img_partida_n', $beneficiaries->img_partida_n, ['class' => 'form-control' . ($errors->has('img_partida_n') ? ' is-invalid' : ''), 'placeholder' => 'img_partida_n']) }}
+            {{ Form::file('img_partida_n', ['class' => 'form-control' . ($errors->has('img_partida_n') ? ' is-invalid' : ''), 'placeholder' => 'img_partida_n']) }}
             {!! $errors->first('img_partida_n', '<div class="invalid-feedback">:message</div>') !!}
-        </div> --}}
-        
-        <div class="form-group" style="    width: 12rem;>">
-            <label>Asignar contrato</label>
-            <select name="contracts_id" class="form-control"  id="contracts" >
-                @if($contracts->count() > 0)
-                {{-- <option disable value="">N/a</option> --}}
-                     @foreach($contracts as $contract)
-                         <option value="{{$contract->id}}">{{$contract->customer->name}}</option>
-                     @endforeach
-                @endif
-            </select>
         </div>
-
-        {{-- <input type="hidden" name="contracts_id" value="{{ $contractId }}"> --}}
-
+        
         <div class="form-group custom-from" >
             {{ Form::label('Parentesco') }}
-            {{ Form::select('parentesco', ['Madre' => 'Madre', 'Padre' => 'Padre'], $beneficiaries->sex, ['class' => 'form-control' . ($errors->has('sex') ? ' is-invalid' : '')]) }}
-            {!! $errors->first('sex', '<div class="invalid-feedback">:message</div>') !!}
+            {{ Form::select('parentesco', ['Abuela' => 'Abuela', 'Abuelo' => 'Abuelo','Aportante' => 'Aportante','Aportante Fallecid@' => 'Aportante Fallecid@','Aportante (F)' => 'Aportante (F)','Aportante (M)' => 'Aportante (M)','Conyuge (F)' => 'Conyuge (F)','Conyuge (M)' => 'Conyuge (M)','Conyuge Fallecid@' => 'Conyuge Fallecid@','Cuñada' => 'Cuñada','Cuñado' => 'Cuñado','Hermana' => 'Hermana','Hermano' => 'Hermano','Padre' => 'Padre','Madre' => 'Madre'], $beneficiaries->sex, ['class' => 'form-control' . ($errors->has('sex') ? ' is-invalid' : '')]) }}
+            {!! $errors->first('parentesco', '<div class="invalid-feedback">:message</div>') !!}
         </div>
          
     </div>
     <div class="box-footer mt20 text-center" style="padding-top: 15px;">
-        <button type="submit" class="btn btn-primary">Registrar</button>
+        <button type="submit" class="btn btn-primary">Actualizar</button>
     </div>
 </div>
 

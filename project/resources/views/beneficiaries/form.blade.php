@@ -63,35 +63,20 @@
             {{ Form::date('date_admission', date('Y-m-d'), ['class' => 'form-control' . ($errors->has('date_admission') ? ' is-invalid' : ''), 'placeholder' => 'Fecha de ingreso']) }}
             {!! $errors->first('date_admission', '<div class="invalid-feedback">:message</div>') !!}
         </div>
-        
-        {{--         <div class="form-group" style="    width: 12rem;>">
-            <label>Asignar contrato</label>
-            <select name="contracts_id" class="form-control"  id="contracts" >
-                @if($contract->count() > 0)
-                <option disable value="">N/a</option>
-                @foreach($contract as $contracts)
-                <option value="{{$contracts->id}}">{{$contracts->customer->name}}</option>
-                @endforeach
-                @endif
-            </select>
-        </div> --}}
-        
-        
+        <div class="form-group add-img">
+            {{ Form::label('Adjuntar Cedula') }} 
+            {{ Form::file('img_cedula', ['class' => 'form-control' . ($errors->has('img_cedula') ? ' is-invalid' : ''), 'placeholder' => 'img_cedula']) }}
+            {!! $errors->first('img_cedula', '<div class="invalid-feedback">:message</div>') !!}
+        </div>        
+        <div class="form-group add-img">
+            {{ Form::label('Adjuntar Partida') }} 
+            {{ Form::file('img_partida_n', ['class' => 'form-control' . ($errors->has('img_partida_n') ? ' is-invalid' : ''), 'placeholder' => 'img_partida_n']) }}
+            {!! $errors->first('img_partida_n', '<div class="invalid-feedback">:message</div>') !!}
+        </div>
         <div class="form-group custom-from" >
             {{ Form::label('Parentesco') }}
             {{ Form::select('parentesco', ['Abuela' => 'Abuela', 'Abuelo' => 'Abuelo','Aportante' => 'Aportante','Aportante Fallecid@' => 'Aportante Fallecid@','Aportante (F)' => 'Aportante (F)','Aportante (M)' => 'Aportante (M)','Conyuge (F)' => 'Conyuge (F)','Conyuge (M)' => 'Conyuge (M)','Conyuge Fallecid@' => 'Conyuge Fallecid@','Cuñada' => 'Cuñada','Cuñado' => 'Cuñado','Hermana' => 'Hermana','Hermano' => 'Hermano','Padre' => 'Padre','Madre' => 'Madre'], $beneficiaries->sex, ['class' => 'form-control' . ($errors->has('sex') ? ' is-invalid' : '')]) }}
             {!! $errors->first('parentesco', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
-
-        <div class="form-group add-img">
-            {{ Form::label('Adjuntar Cedula') }} {{-- acomodar a file --}}
-            {{ Form::file('img_cedula', $beneficiaries->img_cedula, ['class' => 'form-control' . ($errors->has('img_cedula') ? ' is-invalid' : ''), 'placeholder' => 'img_cedula']) }}
-            {!! $errors->first('img_cedula', '<div class="invalid-feedback">:message</div>') !!}
-        </div>        
-        <div class="form-group add-img">
-            {{ Form::label('Adjuntar Partida') }} {{-- acomodar a file --}}
-            {{ Form::file('img_partida_n', $beneficiaries->img_partida_n, ['class' => 'form-control' . ($errors->has('img_partida_n') ? ' is-invalid' : ''), 'placeholder' => 'img_partida_n']) }}
-            {!! $errors->first('img_partida_n', '<div class="invalid-feedback">:message</div>') !!}
         </div>
          
     </div>

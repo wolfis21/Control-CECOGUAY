@@ -97,7 +97,7 @@ class CompaniesController extends Controller
      * @param  companies $companies
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Companies $companies)
+    public function update(Request $request, $id)
     { 
         $request->validate([
         'rif_companies' => 'required',
@@ -106,8 +106,8 @@ class CompaniesController extends Controller
         'num_contact' =>'required',
         ]);
         
-        var_dump($companies->id);
-
+        $companies = Companies::find($id);
+        
         $companies->update($request->all());
 
         return redirect()->route('companies.index')

@@ -119,11 +119,6 @@
                                     {{ __('Beneficiarios') }}
                                 </span>
 
-{{--                                 <div class="float-right">
-                                    <a href="{{ route('beneficiaries.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                      {{ __('Agregar beneficiario') }}
-                                    </a>
-                                </div> --}}
 
                                 <div class="float-right">
                                     <a href="{{ route('beneficiaries.createWithContract', ['contract' => $contract->id]) }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
@@ -163,15 +158,7 @@
                                                 <td>{{ $beneficiarie->date_n}}</td>
                                                 <td>{{ $beneficiarie->date_admission}}</td>
                                                 <td>{{ $beneficiarie->phone}}</td>
-                                            {{-- <td>{{ $beneficiarie->typeService->name}}</td> --}}
-
-{{--                                             <td>001</td>
-                                            <td>Lopez Maria</td>
-                                            <td>1234567</td>
-                                            <td>Madre</td>
-                                            <td>04/08/1980</td>
-                                            <td>{{ $contract->customer->name }} {{ $contract->customer->subname }}</td>
- --}}
+                                            
                                             <td>
                                                 <form action="{{ route('beneficiaries.destroy', $beneficiarie->id) }}" method="POST">
                                                     <a class="btn btn-sm btn-success" href="{{ route('beneficiaries.edit', $beneficiarie->id) }}"><i class="fa fa-fw fa-edit"></i> Editar</a>
@@ -220,13 +207,6 @@
             .form-control {
                 font-size: 14px !important;
             }
-/*             .form-group{
-                display: flex;
-                flex-wrap: nowrap;
-                align-items: center;
-                align-content: stretch;
-                flex-direction: row;
-            } */
 
             .card-body {
                 display: flex;

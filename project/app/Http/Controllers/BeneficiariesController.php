@@ -142,7 +142,7 @@ class BeneficiariesController extends Controller
      * @param  Beneficiaries $Beneficiaries
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Beneficiaries $beneficiaries)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'name' =>'required|string',
@@ -160,23 +160,24 @@ class BeneficiariesController extends Controller
             'parentesco' => 'required',
             'contracts_id' => 'required',
         ]);
+        $beneficiaries = Beneficiaries::find($id);
+        
+        $beneficiaries->fill($request->except('img_cedula', 'img_partida_n'));
+        
         // Verificar si se enviaron nuevos archivos
         if ($request->hasFile('img_cedula')) {
             $imgCedula = $request->file('img_cedula');
             $imgCedulaPath = $imgCedula->store('docs', 'public');
             $beneficiaries->img_cedula = $imgCedulaPath;
         }
-    
+        
         if ($request->hasFile('img_partida_n')) {
             $imgNacimiento = $request->file('img_partida_n');
             $imgNacimientoPath = $imgNacimiento->store('docs', 'public');
-            $beneficiaries->img_nacimiento = $imgNacimientoPath;
+            $beneficiaries->img_partida_n = $imgNacimientoPath;
         }
-
-        $beneficiaries->update($request->all());
-
-/*         return redirect()->route('beneficiaries.index')
-            ->with('success', 'beneficiaries updated successfully'); */
+             
+            $beneficiaries->save();
 
             return redirect()->route('contracts.show', $request->contracts_id)
             ->with('success', 'Beneficiario editado con éxito.');

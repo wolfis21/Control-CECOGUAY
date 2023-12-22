@@ -1,6 +1,6 @@
 <div class="box box-info padding-1">
     <div class="box-body">
-        
+        <input type="hidden" name="id" value="{{ $companies->id }}">
         <div class="form-group">
             {{ Form::label('RIF Empresa') }}
             {{ Form::text('rif_companies', $companies->rif_companies, ['class' => 'form-control' . ($errors->has('rif_companies') ? ' is-invalid' : ''), 'placeholder' => 'Escriba RIF']) }}
