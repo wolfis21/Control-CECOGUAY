@@ -63,8 +63,8 @@ class CustomerController extends Controller
             'civil_status' => 'required|string',
             'profession_status' => 'required|string',
             'address' => 'required|string',
-            'phone' => 'required|integer|min:8',
-            'landline' => 'required|integer|min:8',
+            'phone' => 'required|integer|min:6',
+            'landline' => 'required|integer|min:6',
             'nationality' => 'required|string',
             'date_admission' => 'required|date',
             'offices_id' => 'required',
@@ -109,7 +109,7 @@ class CustomerController extends Controller
             'atrasos' => $currentDate, // valor por defecto
             'suspendido' => '0', // valor por defecto
             'observaciones' => 'No presenta', // valor por defecto
-            'type_services_id' => 1, // valor por defecto
+            'type_services_id' => null, // valor por defecto
             'customers_id' => $customer->id, // usar el id del cliente recién creado
         ]);
 

@@ -179,7 +179,7 @@ class BeneficiariesController extends Controller
              
             $beneficiaries->save();
 
-            return redirect()->route('contracts.show')
+            return redirect()->route('contracts.show', $request->contracts_id)
             ->with('success', 'Beneficiario editado con éxito.');
     }
 

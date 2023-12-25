@@ -63,12 +63,12 @@
         </div>
         <div class="form-group add-img">
             {{ Form::label('Adjuntar Cedula') }} {{-- acomodar a file --}}
-            {{ Form::file('img_cedula', $customer->img_cedula, ['class' => 'form-control' . ($errors->has('img_cedula') ? ' is-invalid' : ''), 'placeholder' => 'img_cedula']) }}
+            {{ Form::file('img_cedula', ['class' => 'form-control' . ($errors->has('img_cedula') ? ' is-invalid' : ''), 'placeholder' => 'img_cedula']) }}
             {!! $errors->first('img_cedula', '<div class="invalid-feedback">Abjuntar img es requerido</div>') !!}
         </div>        
         <div class="form-group add-img">
             {{ Form::label('Adjuntar Partida') }} {{-- acomodar a file --}}
-            {{ Form::file('img_partida_n', $customer->img_partida_n, ['class' => 'form-control' . ($errors->has('img_partida_n') ? ' is-invalid' : ''), 'placeholder' => 'img_partida_n']) }}
+            {{ Form::file('img_partida_n', ['class' => 'form-control' . ($errors->has('img_partida_n') ? ' is-invalid' : ''), 'placeholder' => 'img_partida_n']) }}
             {!! $errors->first('img_partida_n', '<div class="invalid-feedback">Abjuntar img es requerido</div>') !!}
         </div>
         
